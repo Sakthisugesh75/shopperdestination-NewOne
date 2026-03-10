@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BharatReselling Cloud | One Platform for Leads, Sales, Purchase & Invoices</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Use Inter font family for a modern, business look -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" href="assets/images/favicon.ico">
+
+    <style>
+        :root {
+            --color-primary: #374151; /* Slate/Dark Grey for text */
+            --color-accent: #f59e0b; /* Amber/Saffron for highlights */
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--color-primary);
+        }
+        .hero-bg {
+            background-color: #0f172a; /* Deep Slate Blue for a premium feel */
+        }
+        .cta-primary {
+            background-color: #1d4ed8; /* Strong Blue */
+            transition: all 0.3s ease;
+        }
+        .cta-primary:hover {
+            background-color: #1e40af;
+            box-shadow: 0 4px 15px rgba(29, 78, 216, 0.4);
+        }
+        .cta-secondary {
+            border: 2px solid #60a5fa; /* Lighter Blue border */
+            color: #60a5fa;
+            transition: all 0.3s ease;
+        }
+        .cta-secondary:hover {
+            background-color: #1e40af;
+            color: white;
+        }
+        /* Custom class for the 3D dashboard mockup */
+        .dashboard-mockup {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            box-shadow: 0 0 0 8px rgba(255, 255, 255, 0.1), 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+            border: 1px solid #334155;
+            transition: all 0.5s ease;
+        }
+        .tab-button.active {
+            border-bottom: 3px solid var(--color-accent);
+            color: var(--color-primary);
+            font-weight: 600;
+            background-color: #f1f5f9;
+        }
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 antialiased pt-16">
+
+    <!-- 0️⃣ NAVIGATION BAR (New) -->
+    <nav class="bg-white/95 backdrop-blur-md fixed w-full z-50 top-0 left-0 border-b border-gray-200 shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <!-- <span class="text-2xl font-black text-gray-800 tracking-tighter">
+                        Bharat<span class="text-amber-500">Cloud</span>
+                    </span> -->
+                    <img src="assets/images/logo.png" alt="logo" style="width: 25%;">
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Home</a>
+                    <a href="#platform" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Features</a>
+                    <a href="#pricing" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Pricing</a>
+                    <a href="#success" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Stories</a>
+                    <a href="#contact" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Contact</a>
+                    <a href="franchise.html" class="text-gray-600 hover:text-blue-600 font-medium text-sm transition uppercase tracking-wide">Franchise</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-gray-900 focus:outline-none p-2">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full left-0 shadow-lg">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#platform" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 border-b border-gray-50">Features</a>
+                <a href="#pricing" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 border-b border-gray-50">Pricing</a>
+                <a href="#success" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50 border-b border-gray-50">Success Stories</a>
+                <a href="#contact" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50">Contact</a>
+                <a href="franchise.html" class="block px-3 py-3 rounded-md text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-blue-50">Franchise</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 1️⃣ HERO SECTION -->
+    <header class="hero-bg py-16 md:py-24 text-white" id="home">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content: Headline & CTAs -->
+                <div class="space-y-6">
+                    <!-- Badge -->
+                    <span class="inline-flex items-center rounded-full bg-amber-500/10 px-3 py-1 text-sm font-medium text-amber-400 ring-1 ring-inset ring-amber-500/20">
+                        Made in India. Built by Young Engineers.
+                    </span>
+                    <!-- Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        India’s Most Affordable <span class="text-amber-400">All-in-One</span> Business Cloud Suite
+                    </h1>
+                    <!-- Subheadline -->
+                    <p class="text-xl text-gray-300">
+                        CRM, ERP, WMS, Hospital Management, Ecommerce, Digital Marketing, Auto-Posting, Meta Lead Sync — Everything in one powerful platform.
+                    </p>
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-4">
+                        <a href="#demo" class="cta-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg text-lg text-center">
+                            Start Free Demo
+                        </a>
+                        <a href="#contact" class="cta-secondary font-bold py-3 px-8 rounded-xl text-lg text-center">
+                            Talk to Expert
+                        </a>
+                    </div>
+                    <!-- Trust Badges -->
+                    <div class="flex flex-wrap gap-x-6 gap-y-2 pt-6 text-gray-400 font-medium text-sm">
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            9+ Years Experience
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Trusted by 900+ Brands
+                        </span>
+                        <span class="flex items-center">
+                            <svg class="w-4 h-4 text-green-400 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                            Lowest Price in India
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Right Visual: 3D Dashboard Mockup - UPDATED FOR SIZE AND CLARITY -->
+                <div class="hidden lg:block relative lg:py-16">
+                    <div class="dashboard-mockup rounded-2xl w-full h-[550px] p-8 text-gray-300 hover:shadow-2xl">
+                        <div class="text-sm font-semibold mb-6 text-amber-400 border-b border-gray-700 pb-2">BHARAT CLOUD LIVE DASHBOARD (Real-Time Metrics)</div>
+                        <div class="grid grid-cols-2 gap-6 h-full">
+                            <div class="col-span-1 bg-gray-700/50 p-4 rounded-xl border border-gray-600">
+                                <span class="text-sm text-amber-300">New Leads Today</span>
+                                <div class="text-6xl mt-2 font-extrabold text-white">4,120</div>
+                                <p class="text-xs text-green-400 mt-2">▲ 12% vs last week</p>
+                            </div>
+                            <div class="col-span-1 bg-gray-700/50 p-4 rounded-xl border border-gray-600">
+                                <span class="text-sm text-amber-300">Ecommerce Orders</span>
+                                <div class="text-6xl mt-2 font-extrabold text-white">986</div>
+                                <p class="text-xs text-red-400 mt-2">▼ 5% vs last week</p>
+                            </div>
+                            <!-- Auto-Poster Activity / Engagement Rate -->
+                            <div class="col-span-2 bg-gray-700/50 p-4 rounded-xl flex flex-col justify-between">
+                                <span class="text-sm text-gray-400 font-medium">Auto-Poster Activity (Engagement Rate)</span>
+                                <!-- Progress Bar Mockup -->
+                                <div class="w-full bg-gray-600 rounded-full h-4 mt-2">
+                                    <div class="bg-blue-400 h-4 rounded-full" style="width: 78%"></div>
+                                </div>
+                                <span class="text-xs text-blue-400 mt-1">78% Posts Scheduled & Optimized by AI</span>
+                            </div>
+                            <!-- Additional Metric to fill the space and look professional -->
+                            <div class="col-span-2 bg-gray-700/50 p-4 rounded-xl">
+                                <span class="text-sm text-gray-400 font-medium">Warehouse Stock Value (Total Inventory)</span>
+                                <div class="text-4xl mt-2 font-bold text-green-400">₹ 87.5 LAKH</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 2️⃣ VALUE PROP SECTION -->
+    <section class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Why BharatReselling Cloud?</h2>
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Column 1 -->
+                <div class="text-center p-6 bg-gray-100 rounded-xl shadow-md">
+                    <svg class="w-12 h-12 text-blue-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 7v10c0 1.1.9 2 2 2h12a2 2 0 002-2V7M4 7h16M4 7h-8M20 7h-8M12 7V4a2 2 0 012-2h4a2 2 0 012 2v3M12 7v3"/></svg>
+                    <h3 class="text-xl font-semibold mb-2">All Tools Under One Roof</h3>
+                    <p class="text-gray-600">CRM + ERP + Warehouse + Ecommerce + Marketing + Billing + HRMS. Stop paying for dozens of disjointed software subscriptions.</p>
+                </div>
+                <!-- Column 2 -->
+                <div class="text-center p-6 bg-gray-100 rounded-xl shadow-md">
+                    <svg class="w-12 h-12 text-green-600 mx-auto mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2-1.343-2-3-2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 18s-4 2-8 0"/></svg>
+                    <h3 class="text-xl font-semibold mb-2">Indian Market Price – Unbeatable</h3>
+                    <p class="text-gray-600">Our native pricing structure means you save 70% compared to expensive foreign SaaS tools, maximizing your savings.</p>
+                </div>
+                <!-- Column 3 -->
+                <div class="text-center p-6 bg-gray-100 rounded-xl shadow-md">
+                    <svg class="w-12 h-12 text-red-600 mx-auto mb-4" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.1-1.22-5.45-3.66-6.52-6.57H5.97c-.32.96-.5 1.98-.5 3.03 0 2.47.81 4.74 2.16 6.57L13 19.93zM12 4.07c3.1 1.22 5.45 3.66 6.52 6.57h-3.56c-.32-.96-.5-1.98-.5-3.03 0-2.47-.81-4.74-2.16-6.57L12 4.07zM4.08 13c.12-.66.19-1.34.19-2h3.56c.32.96.5 1.98.5 3.03 0 2.47-.81 4.74-2.16 6.57L4.08 13zM12 19.93c3.1-1.22 5.45-3.66 6.52-6.57h-3.56c-.32.96-.5 1.98-.5 3.03 0 2.47-.81 4.74-2.16-6.57L12 19.93zM19.92 11c-.12.66-.19 1.34-.19 2h-3.56c-.32-.96-.5-1.98-.5-3.03 0-2.47.81-4.74 2.16-6.57L19.92 11z"/></svg>
+                    <h3 class="text-xl font-semibold mb-2">Made by Indian Engineers</h3>
+                    <p class="text-gray-600">Built ground-up for Indian businesses, ensuring full GST compliance, unique regional workflows, and local support.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3️⃣ PRODUCT SUITE SECTION (Tabs) -->
+    <section class="py-16 md:py-24 bg-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Discover Your Complete Business Suite</h2>
+
+            <!-- Tabs Navigation -->
+            <div class="flex flex-wrap justify-center border-b border-gray-300 mb-8 overflow-x-auto">
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap active" data-tab="crm">🔹 CRM</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="erp">🔹 ERP</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="wms">🔹 Warehouse Management</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="hospital">🔹 Hospital Management</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="ecommerce">🔹 Ecommerce Suite</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="marketing">🔹 Digital Marketing Suite</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="autopost">🔹 Auto-Post Tool</button>
+                <button class="tab-button px-6 py-3 text-gray-700 whitespace-nowrap" data-tab="analytics">🔹 Analytics</button>
+            </div>
+
+            <!-- Tab Content -->
+            <div id="tab-content" class="p-8 bg-white rounded-xl shadow-xl">
+                <!-- CRM Content (Focus: Lead Management & Sales Increase) -->
+                <div class="tab-pane active" id="crm-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-3xl font-bold text-blue-800 mb-4">CRM – Close More Deals, Faster</h3>
+                            <ul class="space-y-3 text-lg text-gray-600 list-inside">
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Auto Meta/Google lead capture directly into your pipeline.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Automated WhatsApp and Email follow-ups to nurture leads.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Customizable Sales Pipeline and task reminders to ensure zero leakage.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Real-time dashboard insights on conversion rates and team performance.</li>
+                            </ul>
+                            <a href="#" class="inline-block mt-6 cta-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg">
+                                View CRM Demo
+                            </a>
+                        </div>
+                        <!-- CRM Visual Placeholder: Lead Pipeline for Sales Increase -->
+                        <div class="bg-blue-50 p-4 rounded-xl flex items-center justify-center text-blue-500 font-semibold text-xl border border-blue-200 shadow-md">
+                            <img src="assets/images/saasone.jpg" alt="Visual representation of the lead management pipeline and conversion rate increase." class="w-full h-auto rounded-lg" onerror="this.onerror=null;">
+                                
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ERP Content (Focus: Company Benefit & Efficiency) -->
+                <div class="tab-pane hidden" id="erp-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <!-- ERP Visual Placeholder: Company Efficiency & Cost Savings -->
+                        <div class="bg-green-50 p-4 rounded-xl flex items-center justify-center text-green-500 font-semibold text-xl border border-green-200 shadow-md">
+                            <img src="assets/images/saasthree.jpg
+                            " alt="Visual representation of the lead management pipeline and conversion rate increase." class="w-full h-auto rounded-lg" onerror="this.onerror=null;">
+                        </div>
+                        <div>
+                            <h3 class="text-3xl font-bold text-green-800 mb-4">ERP – Run Your Company Smoothly</h3>
+                            <ul class="space-y-3 text-lg text-gray-600 list-inside">
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Comprehensive Purchase and Inventory management.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Integrated Financial Accounting and Ledger maintenance.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Production Planning and Material Resource Management.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Fully GST-ready Invoicing, Returns, and Compliance reports.</li>
+                            </ul>
+                            <a href="#" class="inline-block mt-6 cta-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg">
+                                See ERP Features
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Other content panes remain the same... -->
+
+                <!-- Placeholder content for WMS, Hospital, etc. -->
+                <div class="tab-pane hidden" id="wms-content">
+                    <h3 class="text-3xl font-bold mb-4">WMS – Smart Warehouse Management</h3>
+                    <p class="text-gray-600">Track stock, manage locations, and optimize picking with integrated barcode support. Connects seamlessly with logistics partners.</p>
+                </div>
+                <div class="tab-pane hidden" id="hospital-content">
+                    <h3 class="text-3xl font-bold mb-4">Hospital Management – Specialized Modules</h3>
+                    <p class="text-gray-600">Patient admission, discharge, billing, doctor scheduling, and Electronic Health Records (EHR) compliant system.</p>
+                </div>
+                <div class="tab-pane hidden" id="ecommerce-content">
+                    <h3 class="text-3xl font-bold mb-4">Ecommerce Suite – Scale Your Online Store</h3>
+                    <p class="text-gray-600">Manage storefronts, handle COD/Prepaid orders, automate shipping labels, and sync inventory across marketplaces.</p>
+                </div>
+                
+                <!-- DIGITAL MARKETING SUITE (Now with Gemini AI Integration and updated visuals) -->
+                <div class="tab-pane hidden" id="marketing-content">
+                    <div class="grid md:grid-cols-2 gap-8 items-start">
+                        <!-- Left: Core Feature List -->
+                        <div>
+                            <h3 class="text-3xl font-bold text-purple-800 mb-4">Digital Marketing Suite – Engage Your Audience</h3>
+                            <ul class="space-y-3 text-lg text-gray-600 list-inside">
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Built-in email, SMS, and WhatsApp marketing campaign tools.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Segment lists based on purchase history and activity.</li>
+                                <li class="flex items-start"><span class="font-bold text-amber-500 mr-2">✓</span> Seamless integration with the Auto-Post Tool for daily content.</li>
+                            </ul>
+                            <a href="#" class="inline-block mt-6 cta-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg bg-purple-600 hover:bg-purple-700">
+                                View Marketing Automation
+                            </a>
+                        </div>
+
+                        <!-- Right: ✨ AI Content Idea Generator Demo -->
+                        <div class="bg-purple-50 p-6 rounded-xl border border-purple-200 shadow-inner">
+                            <h4 class="text-xl font-bold mb-3 text-purple-700">✨ AI Content Idea Generator Demo</h4>
+                            <p class="text-sm text-gray-600 mb-4">Test our content engine! Input a brief marketing goal and get an instant, localized campaign idea.</p>
+                            
+                            <label for="marketing-goal" class="block text-sm font-medium text-gray-700 mb-1">Your Marketing Goal:</label>
+                            <input type="text" id="marketing-goal" class="w-full p-2 border border-gray-300 rounded-lg mb-3 focus:ring-purple-500 focus:border-purple-500" placeholder="e.g., Promote our new organic cotton T-shirt line.">
+
+                            <button id="generate-content-btn" class="w-full cta-primary bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded-xl flex items-center justify-center">
+                                <span id="btn-text">✨ Generate Campaign Idea</span>
+                                <div id="btn-loader" class="spinner hidden ml-2"></div>
+                            </button>
+
+                            <!-- AI Output Area - ENHANCED VISUALS -->
+                            <div class="mt-4 p-4 bg-white rounded-lg min-h-24 shadow-lg ring-2 ring-purple-300/50 relative overflow-hidden">
+                                <p class="text-sm font-semibold mb-2 text-purple-700">AI Campaign Suggestion:</p>
+                                <!-- Creative Sparkle Icon -->
+                                <span class="absolute top-0 right-0 text-3xl opacity-70 transform rotate-12 text-amber-400">✨</span>
+                                <div id="ai-output" class="text-gray-800 italic text-sm">
+                                    Your generated campaign idea will appear here. Try an Indian festival-related topic!
+                                </div>
+                                <div id="ai-error" class="text-red-500 font-medium text-sm mt-2 hidden"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane hidden" id="autopost-content">
+                    <h3 class="text-3xl font-bold mb-4">Auto-Post Tool – Social Media Automation</h3>
+                    <p class="text-gray-600">Schedule and post content automatically across all major social platforms, saving hours of manual work every week.</p>
+                </div>
+                <div class="tab-pane hidden" id="analytics-content">
+                    <h3 class="text-3xl font-bold mb-4">Analytics – Data-Driven Decisions</h3>
+                    <p class="text-gray-600">Centralized reporting for Sales, Inventory, Finance, and Marketing. Custom report builder included for deep analysis.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4️⃣ “ONE PLATFORM DOES EVERYTHING” SECTION -->
+    <section class="py-16 md:py-24" id="platform">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">The Single Platform That Powers Your Entire Ecosystem</h2>
+            <div class="grid lg:grid-cols-2 gap-10 bg-white p-8 rounded-xl shadow-2xl border border-gray-200">
+                <!-- Left: Dashboard Visual -->
+                <div class="relative bg-gray-100 rounded-lg p-6 h-96 flex items-center justify-center border-4 border-amber-500/50">
+<img src="assets/images/saastwo.jpg" alt="Visual representation of the lead management pipeline and conversion rate increase." class="w-full h-auto rounded-lg" onerror="this.onerror=null;">
+
+                    <!-- <div class="absolute bottom-0 right-0 m-4 text-sm text-gray-400">View on Desktop/Mobile</div> -->
+                </div>
+                <!-- Right: Checklist -->
+                <div class="space-y-6">
+                  
+                    <ul class="space-y-4">
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Complete Workflow: Lead → Order → Invoice → Delivery, fully automated.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Financial Compliance: GST billing + Integrated accounting modules.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Inventory Control: Warehouse stock management, location tracking, and barcode integration.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Sales Channels: Fully customizable Ecommerce storefront and marketplace integration.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Marketing: Digital marketing tools & AI auto poster for daily content.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Ad Management: Direct sync with Meta + Google Ads Manager for ROI tracking.</li>
+                        <li class="flex items-start text-lg"><span class="font-bold text-blue-600 mr-3">✔</span> Specialized Use: Dedicated Hospital patient module and multi-branch support.</li>
+                    </ul>
+                    <a href="#demo" class="inline-block mt-4 cta-primary text-white font-bold py-3 px-8 rounded-xl shadow-lg text-lg">
+                        Book a 15-min walkthrough →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5️⃣ AFFORDABLE PRICING SECTION -->
+    <section class="py-16 md:py-24 bg-gray-50" id="pricing">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-extrabold mb-4">India’s Most Budget-Friendly Business Suite</h2>
+                <p class="text-xl text-gray-600">Premium power without the international price tag.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-8">
+                <!-- Starter Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Starter</h3>
+                    <p class="text-gray-500 mb-6">Perfect for Small Businesses & Startups</p>
+                    <div class="text-4xl font-extrabold text-blue-600 mb-4">
+                        ₹999 <span class="text-xl font-medium text-gray-500">/ month</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 flex-grow">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Full CRM Access</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> GST Billing & Invoicing</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Automated Lead Capture (Meta/Google)</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Social Media Auto-Post Tool</li>
+                    </ul>
+                    <a href="#" class="mt-6 cta-secondary py-3 text-center rounded-xl font-semibold">
+                        Select Starter
+                    </a>
+                </div>
+
+                <!-- Growth Plan (Recommended) -->
+                <div class="bg-blue-600 p-8 rounded-2xl shadow-2xl ring-4 ring-amber-500 transform scale-105 flex flex-col">
+                    <div class="text-xs font-bold uppercase tracking-widest text-white bg-amber-500 px-3 py-1 rounded-full w-fit mb-2">Most Popular</div>
+                    <h3 class="text-3xl font-bold mb-2 text-white">Growth</h3>
+                    <p class="text-blue-200 mb-6">Ideal for Ecommerce & Mid-size Retailers</p>
+                    <div class="text-5xl font-extrabold text-amber-300 mb-4">
+                        ₹2,999 <span class="text-xl font-medium text-blue-200">/ month</span>
+                    </div>
+                    <ul class="space-y-3 text-white flex-grow">
+                        <li class="flex items-center"><span class="text-amber-300 mr-2">✓</span> All Starter features</li>
+                        <li class="flex items-center"><span class="text-amber-300 mr-2">✓</span> ERP Lite (Purchase/Basic Accounting)</li>
+                        <li class="flex items-center"><span class="text-amber-300 mr-2">✓</span> Full Inventory Management (Single Warehouse)</li>
+                        <li class="flex items-center"><span class="text-amber-300 mr-2">✓</span> Dedicated Ecommerce Suite</li>
+                        <li class="flex items-center"><span class="text-amber-300 mr-2">✓</span> Digital Marketing & Campaign Manager</li>
+                    </ul>
+                    <a href="#" class="mt-6 bg-white text-blue-600 py-3 text-center rounded-xl font-bold hover:bg-gray-100 transition">
+                        Start 14-Day Free Trial
+                    </a>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-200 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2 text-gray-800">Enterprise</h3>
+                    <p class="text-gray-500 mb-6">For Factories, Hospitals, & Large Agencies</p>
+                    <div class="text-4xl font-extrabold text-gray-800 mb-4">
+                        ₹6,999 <span class="text-xl font-medium text-gray-500">/ month</span>
+                    </div>
+                    <ul class="space-y-3 text-gray-600 flex-grow">
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> All Growth features</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Full ERP + Production & WMS</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Hospital Management Module</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Multi-Branch / Multi-Company Support</li>
+                        <li class="flex items-center"><span class="text-green-500 mr-2">✓</span> Dedicated Ads Manager & Custom Integrations</li>
+                    </ul>
+                    <a href="#" class="mt-6 cta-secondary py-3 text-center rounded-xl font-semibold">
+                        Contact Sales
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Line Text -->
+            <div class="text-center mt-12 text-xl font-semibold text-gray-700">
+                <p>✅ <span class="text-red-500">No Hidden Charges.</span> ✅ <span class="text-red-500">No Per-User Charges.</span> ✅ Unlimited Users Included in all plans.</p>
+                <a href="#" class="inline-block mt-4 text-blue-600 hover:text-blue-800 font-medium">See Full Pricing →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6️⃣ “BUILT FOR INDIA” SECTION -->
+    <section class="py-16 bg-white border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Truly Built for India, By India</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 text-center">
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">🇮🇳</span>
+                    <p class="font-semibold">GST Ready</p>
+                    <p class="text-sm text-gray-500">Seamless compliance.</p>
+                </div>
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">📦</span>
+                    <p class="font-semibold">Delivery Workflow</p>
+                    <p class="text-sm text-gray-500">Integrated logistics support.</p>
+                </div>
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">🛒</span>
+                    <p class="font-semibold">Ecommerce-First</p>
+                    <p class="text-sm text-gray-500">Designed for online sellers.</p>
+                </div>
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">💳</span>
+                    <p class="font-semibold">UPI/Razorpay Compatible</p>
+                    <p class="text-sm text-gray-500">Native payment gateway support.</p>
+                </div>
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">📞</span>
+                    <p class="font-semibold">Indian Support Team</p>
+                    <p class="text-sm text-gray-500">24/7 local language support.</p>
+                </div>
+                <div class="p-4 rounded-xl space-y-2">
+                    <span class="text-4xl">⚙️</span>
+                    <p class="font-semibold">Multi-Lingual</p>
+                    <p class="text-sm text-gray-500">English, Hindi, Tamil, Malayalam.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7️⃣ CUSTOMER SUCCESS STORIES -->
+    <section class="py-16 md:py-24 bg-gray-100" id="success">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Trusted By Diverse Indian Businesses</h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Card 1: Realtors -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-amber-500">
+                    <div class="font-bold text-lg mb-2 text-gray-700">Realtors</div>
+                    <p class="italic text-gray-600">"Using BharatReselling Cloud, we reduced our software cost by <span class="font-bold text-green-600">83%</span> and automated 80% of lead follow-up tasks."</p>
+                    <div class="mt-4 text-sm font-medium text-gray-500">— Ankit S., Mumbai Realty</div>
+                </div>
+                <!-- Card 2: Ecommerce brands -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-blue-500">
+                    <div class="font-bold text-lg mb-2 text-gray-700">Ecommerce Brands</div>
+                    <p class="italic text-gray-600">"Inventory sync and auto-posting saved us 15 hours a week. A truly integrated, made-for-ecommerce platform."</p>
+                    <div class="mt-4 text-sm font-medium text-gray-500">— Pooja V., Delhi Lifestyle Goods</div>
+                </div>
+                <!-- Card 3: Manufacturers -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-red-500">
+                    <div class="font-bold text-lg mb-2 text-gray-700">Manufacturers</div>
+                    <p class="italic text-gray-600">"The WMS and production module scaled with us, handling 3 branches seamlessly. Great value for the full ERP features."</p>
+                    <div class="mt-4 text-sm font-medium text-gray-500">— Rajesh M., Chennai Fabrication</div>
+                </div>
+                <!-- Card 4: Hospitals -->
+                <div class="bg-white p-6 rounded-xl shadow-md border-t-4 border-green-500">
+                    <div class="font-bold text-lg mb-2 text-gray-700">Hospitals</div>
+                    <p class="italic text-gray-600">"The specialized patient module and secure billing were exactly what we needed. Highly recommend for healthcare providers."</p>
+                    <div class="mt-4 text-sm font-medium text-gray-500">— Dr. Kavita L., Pune Medical Trust</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8️⃣ COMPETITOR COMPARISON -->
+    <section class="py-16" id="comparison">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center mb-12">Price vs. Power: The Clear Choice</h2>
+
+            <div class="overflow-x-auto bg-white rounded-xl shadow-2xl">
+                <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-blue-600 text-white">
+                        <tr>
+                            <th scope="col" class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold sm:pl-6">Feature</th>
+                            <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold">Foreign SaaS (Tier 1)</th>
+                            <th scope="col" class="px-3 py-3.5 text-center text-sm font-semibold bg-amber-500">BharatReselling Cloud</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">CRM</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-red-500 font-bold">Paid Add-on</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-green-600 font-bold bg-amber-50/50">✔ Included (All Plans)</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">ERP (Full)</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-red-500 font-bold">Paid Add-on</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-green-600 font-bold bg-amber-50/50">✔ Included (Growth+)</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Warehouse/WMS</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-red-500 font-bold">Paid Add-on</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-green-600 font-bold bg-amber-50/50">✔ Included</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Hospital Module</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-red-500 font-bold">Not Available</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-green-600 font-bold bg-amber-50/50">✔ Included (Enterprise)</td>
+                        </tr>
+                        <tr>
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">Meta/Google Ads Manager Sync</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-red-500 font-bold">Not Available</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-green-600 font-bold bg-amber-50/50">✔ Included</td>
+                        </tr>
+                        <tr class="bg-gray-50 font-extrabold text-lg">
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 text-gray-900">Starting Price (Approx.)</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-800">₹15,000 / month</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-blue-600 bg-amber-100">₹999 / month</td>
+                        </tr>
+                        <tr class="bg-gray-50 font-extrabold text-lg">
+                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm sm:pl-6 text-gray-900">Support</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-gray-800">Ticket Only (Global)</td>
+                            <td class="whitespace-nowrap px-3 py-4 text-sm text-center text-blue-600 bg-amber-100">✔ Dedicated India Support</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9️⃣ CTA SECTION (Final) -->
+    <section class="py-16 md:py-24 hero-bg" id="contact">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
+            <h2 class="text-4xl font-extrabold mb-6">Grow Your Business With One Powerful Cloud Platform</h2>
+            <p class="text-xl text-gray-300 mb-8">Stop juggling systems. Start scaling smart.</p>
+            <a href="#demo" class="cta-primary text-white font-bold py-4 px-12 rounded-xl shadow-2xl text-xl hover:scale-105 transition transform duration-300">
+                Start Free Demo →
+            </a>
+        </div>
+    </section>
+
+    <!-- 10️⃣ FOOTER (Consistent with Homepage) -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-8 border-b border-gray-700 pb-8">
+                <!-- Column 1: Product Suite -->
+                <div>
+                    <h4 class="font-bold mb-4 text-amber-500">Product Suite</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white">CRM</a></li>
+                        <li><a href="index.html" class="hover:text-white">ERP</a></li>
+                        <li><a href="index.html" class="hover:text-white">Warehouse Management</a></li>
+                        <li><a href="index.html" class="hover:text-white">Hospital Software</a></li>
+                        <li><a href="index.html" class="hover:text-white">Digital Marketing Suite</a></li>
+                    </ul>
+                </div>
+                <!-- Column 2: Resources -->
+                <div>
+                    <h4 class="font-bold mb-4 text-amber-500">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html#pricing" class="hover:text-white">Pricing Page</a></li>
+                        <li><a href="index.html#demo" class="hover:text-white">Demo Booking</a></li>
+                        <li><a href="index.html#success" class="hover:text-white">Customer Stories</a></li>
+                        <li><a href="index.html#comparison" class="hover:text-white">Comparison</a></li>
+                    </ul>
+                </div>
+                <!-- Column 3: Company -->
+                <div>
+                    <h4 class="font-bold mb-4 text-amber-500">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html" class="hover:text-white">About Us</a></li>
+                        <li><a href="index.html" class="hover:text-white">Careers</a></li>
+                        <li><a href="index.html" class="hover:text-white">Blog</a></li>
+                        <li><a href="#" class="hover:text-white">Support</a></li>
+                    </ul>
+                </div>
+                <!-- Column 4 & 5: Contact & Social -->
+                <div class="col-span-2 space-y-4">
+                    <h4 class="font-bold mb-4 text-amber-500">Contact & Social</h4>
+                    <p class="text-sm text-gray-400">Email: sales@bharatresellingcloud.com</p>
+                    <p class="text-sm text-gray-400">Phone: +91 82489 30266</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white">Twitter</a>
+                        <a href="#" class="text-gray-400 hover:text-white">LinkedIn</a>
+                        <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 BharatReselling Cloud. All rights reserved.</p>
+                <p class="mt-2">Made in India ❤️ by Bharat Reselling</p>
+                <div class="mt-4 space-x-4">
+                    <a href="policies.html#privacy" class="hover:text-amber-500 transition">Privacy</a>
+                    <a href="policies.html#terms" class="hover:text-amber-500 transition">Terms</a>
+                    <a href="policies.html#refund" class="hover:text-amber-500 transition">User Data Deletion</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const API_KEY = ""; // Placeholder for the Gemini API Key
+
+        // Utility function for exponential backoff
+        async function fetchWithExponentialBackoff(url, options, maxRetries = 5) {
+            for (let i = 0; i < maxRetries; i++) {
+                try {
+                    const response = await fetch(url, options);
+                    if (!response.ok) {
+                        if (response.status === 429 && i < maxRetries - 1) {
+                            const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                            // console.log(`Rate limit exceeded. Retrying in ${delay / 1000}s...`);
+                            await new Promise(resolve => setTimeout(resolve, delay));
+                            continue;
+                        }
+                        throw new Error(`API request failed with status ${response.status}`);
+                    }
+                    return response;
+                } catch (error) {
+                    if (i === maxRetries - 1) {
+                        throw error;
+                    }
+                    // For network errors, apply backoff and retry
+                    const delay = Math.pow(2, i) * 1000 + Math.random() * 1000;
+                    // console.log(`Network error. Retrying in ${delay / 1000}s...`);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+        }
+
+        async function generateMarketingIdea(goal) {
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${API_KEY}`;
+            
+            const systemPrompt = "You are a professional digital marketing strategist in India. Your task is to provide a concise, creative, and action-oriented social media campaign idea, including 3 relevant hashtags, tailored for the Indian market and based on the user's marketing goal. Respond directly with the campaign idea, formatting it using bold text for key points and placing hashtags at the end.";
+            const userQuery = `Generate a compelling social media campaign idea for a SaaS company's marketing goal: "${goal}"`;
+
+            const payload = {
+                contents: [{ parts: [{ text: userQuery }] }],
+                systemInstruction: {
+                    parts: [{ text: systemPrompt }]
+                },
+            };
+
+            const options = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            };
+
+            try {
+                const response = await fetchWithExponentialBackoff(apiUrl, options);
+                const result = await response.json();
+                
+                const text = result.candidates?.[0]?.content?.parts?.[0]?.text;
+                
+                if (text) {
+                    return text;
+                } else {
+                    return "The AI could not generate a suggestion. Please try a different goal.";
+                }
+
+            } catch (error) {
+                console.error("Gemini API Error:", error);
+                return "Error: Failed to connect to the AI service. Please check your connection.";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            const generateBtn = document.getElementById('generate-content-btn');
+            const marketingGoalInput = document.getElementById('marketing-goal');
+            const aiOutputDiv = document.getElementById('ai-output');
+            const btnTextSpan = document.getElementById('btn-text');
+            const btnLoaderDiv = document.getElementById('btn-loader');
+            const aiErrorDiv = document.getElementById('ai-error');
+            
+            // Mobile Menu Logic
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                    // Optional: Toggle icon between hamburger and X
+                });
+            }
+
+            // Close mobile menu when a link is clicked
+            const mobileLinks = mobileMenu.querySelectorAll('a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+
+            function switchTab(tabName) {
+                // Remove active state from all buttons and panes
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabPanes.forEach(pane => pane.classList.add('hidden'));
+
+                // Add active state to the clicked button
+                const activeBtn = document.querySelector(`.tab-button[data-tab="${tabName}"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                }
+
+                // Show the corresponding pane
+                const activePane = document.getElementById(`${tabName}-content`);
+                if (activePane) {
+                    activePane.classList.remove('hidden');
+                }
+            }
+
+            // Event listener for tab clicks
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabName = button.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+
+            // Ensure the default tab (CRM) is active on load
+            // switchTab('crm'); 
+
+            // AI Content Generation Logic
+            generateBtn.addEventListener('click', async () => {
+                const goal = marketingGoalInput.value.trim();
+
+                if (!goal) {
+                    aiErrorDiv.textContent = "Please enter a marketing goal to generate an idea.";
+                    aiErrorDiv.classList.remove('hidden');
+                    return;
+                }
+
+                // Clear previous output/error and show loading state
+                aiOutputDiv.innerHTML = `<p class="text-center text-sm text-purple-500">Generating idea...</p>`;
+                aiErrorDiv.classList.add('hidden');
+                btnTextSpan.textContent = '';
+                btnLoaderDiv.classList.remove('hidden');
+                generateBtn.disabled = true;
+
+                try {
+                    const resultText = await generateMarketingIdea(goal);
+                    aiOutputDiv.innerHTML = resultText.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br>');
+                } catch (error) {
+                    aiErrorDiv.textContent = "Error during generation. Please check the console for details.";
+                    aiErrorDiv.classList.remove('hidden');
+                    aiOutputDiv.textContent = "Could not generate content.";
+                    console.error("Generation Error:", error);
+                } finally {
+                    // Reset button state
+                    btnTextSpan.textContent = '✨ Generate Campaign Idea';
+                    btnLoaderDiv.classList.add('hidden');
+                    generateBtn.disabled = false;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
