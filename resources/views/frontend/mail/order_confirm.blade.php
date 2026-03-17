@@ -36,7 +36,7 @@
     <?php 
         $date = new DateTime($details['date']);
         $formattedDate = $date->format('M j, Y');
-        $baseurl = 'http://shoppersDestination.in/';
+        $baseurl = 'http://shopperdestination.com/';
     ?>
     
     <!-- Wrapper -->
@@ -51,7 +51,7 @@
                     <tr>
                         <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px 40px; text-align: center;">
                             <!-- Logo -->
-                            <img src="http://Shoppers Destination.in/frontassets/images/logo/logo.png" alt="Shoppers Destination Logo" width="160" style="display: inline-block; margin-bottom: 30px;">
+                            <img src="http://shopperdestination.com/frontassets/images/logo/E-Logoedit.png" alt="Shoppers Destination Logo" width="160" style="display: inline-block; margin-bottom: 30px;">
                             
                             <!-- Success Icon -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
@@ -204,7 +204,7 @@
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
                                 <tr>
                                     <td style="border-radius: 50px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                                        <a href="http://Shoppers Destination.in/my-profile" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; letter-spacing: 0.5px;">
+                                        <a href="http://shopperdestination.com/my-profile" target="_blank" style="display: inline-block; padding: 16px 40px; font-size: 15px; font-weight: 600; color: #ffffff; text-decoration: none; letter-spacing: 0.5px;">
                                             Track Your Order →
                                         </a>
                                     </td>
@@ -231,8 +231,8 @@
                                 Questions about your order?
                             </p>
                             <p style="margin: 0; font-size: 14px; color: #666666; line-height: 1.8;">
-                                📧 <a href="mailto:contact@Shoppers Destination.in" style="color: #667eea; text-decoration: none;">contact@Shoppers Destination.in</a><br>
-                                📞 <a href="tel:+917339385705" style="color: #667eea; text-decoration: none;">+91 733 938 5705</a>
+                                📧 <a href="mailto:contact@shoppersdestination.com" style="color: #667eea; text-decoration: none;">contact@shoppersdestination.com</a><br>
+                                📞 <a href="tel:+919342142087" style="color: #667eea; text-decoration: none;">+91 934 214 2087</a>
                             </p>
                             <p style="margin: 24px 0 0; font-size: 15px; color: #333333; line-height: 1.6;">
                                 Thanks for shopping with us!<br>
@@ -246,22 +246,22 @@
                         <td style="background: linear-gradient(135deg, #1a1a3e 0%, #0c0c1e 100%); padding: 32px 48px; text-align: center;">
                             <p style="margin: 0 0 16px; font-size: 12px; color: rgba(255, 255, 255, 0.7); line-height: 1.6;">
                                 © 2025 Shoppers Destination. All Rights Reserved.<br>
-                                2/153D, Mariyamman Kovil Street, Thiruppani Karisalkulam, Tirunelveli TN-627010
+                                24A, RS Puram Palayakadu, North Uthukuli Road, Tiruppur 641607.
                             </p>
                             
                             <!-- Footer Links -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
                                 <tr>
                                     <td style="padding: 0 12px;">
-                                        <a href="http://Shoppers Destination.in/" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Visit Us</a>
+                                        <a href="http://shopperdestination.com/" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Visit Us</a>
                                     </td>
                                     <td style="color: rgba(255, 255, 255, 0.3);">|</td>
                                     <td style="padding: 0 12px;">
-                                        <a href="http://Shoppers Destination.in/privacy-policy" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Privacy</a>
+                                        <a href="http://shopperdestination.com/privacy-policy" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Privacy</a>
                                     </td>
                                     <td style="color: rgba(255, 255, 255, 0.3);">|</td>
                                     <td style="padding: 0 12px;">
-                                        <a href="http://Shoppers Destination.in/terms-condition" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Terms</a>
+                                        <a href="http://shopperdestination.com/terms-condition" target="_blank" style="font-size: 12px; color: rgba(255, 255, 255, 0.6); text-decoration: none;">Terms</a>
                                     </td>
                                 </tr>
                             </table>

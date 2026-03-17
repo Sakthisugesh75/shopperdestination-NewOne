@@ -675,7 +675,7 @@ if (fullname != "" && address != "" && postcode != "" && city != "" && state != 
                     "currency": $('#amtcurrency').val(),
                     "name": "Shoppers Destination",
                     "description": "Purchase Payment",
-                    "image": "<?php echo url('/'); ?>/images/logo/favicon.png",
+                    "image": "<?php echo url('/'); ?>/frontassets/images/logo/favicon.png",
                     "order_id": payment_id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
                     "handler": function(response) {
                         $.ajaxSetup({

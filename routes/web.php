@@ -40,7 +40,7 @@ Route::any('user-login', [Controllers\User\FrontendController::class, 'user_logi
 Route::any('user-register', [Controllers\User\FrontendController::class, 'user_register']);
 Route::any('my-profile', [Controllers\User\FrontendController::class, 'user_profile']);
 Route::any('my-wishlist', [Controllers\User\FrontendController::class, 'user_wishlist']);
-Route::any('my-order', [Controllers\User\FrontendController::class, 'user_history']);
+Route::any('my-orders', [Controllers\User\FrontendController::class, 'user_history']);
 Route::any('cart', [Controllers\User\FrontendController::class, 'user_cart']);
 Route::any('checkout', [Controllers\User\FrontendController::class, 'checkout']);
 
