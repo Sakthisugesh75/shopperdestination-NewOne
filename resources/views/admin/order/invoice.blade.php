@@ -43,13 +43,16 @@
                 <p class="text-dark mb-2">From</p>
 
                 <address>
+
+  
+
+
                     <span>Shopper Destination</span>
-                    <br> No 9 1st A Main Road 1st Cross,
-                    <br> Munisuppa Reddy Layout, Hongachandra,
-                    <br> Near Rajarajeshwari Temple, Bangalore,
-                    <br> Karnataka, In, 560068.
+                    <br> 24A, RS Puram Palayakadu,
+                    <br> North Uthukuli Road,
+                    <br>Tiruppur 641607.
                     <br> <span>Email:</span> contact@shopperdestination.com
-                    <br> <span>Phone:</span> (+91) 733 938 5705
+                    <br> <span>Phone:</span> (+91) 934 214 2087
                 </address>
             </div>
             <div class="col-xl-3 col-lg-4 col-sm-6">

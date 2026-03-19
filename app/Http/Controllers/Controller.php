@@ -49,7 +49,6 @@ class Controller extends BaseController
         $token_expired = false;
         if ($authorization) {
             $authorization_details = explode('|', $this->my_decrypt($authorization));
-            //print_r($authorization_details);
             if (!empty($authorization_details) && sizeof($authorization_details) >= 6 && $authorization_details[4] == "test") {
                 $authorized = true;
             } else {

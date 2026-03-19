@@ -60,6 +60,7 @@
                         <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 50px 40px; text-align: center;">
                             <!-- Logo -->
                             <img src="http://shopperdestination.com/frontassets/images/logo/E-Logoedit.png" alt="Shoppers Destination Logo" width="160" style="display: inline-block; margin-bottom: 30px;">
+                            <img src="http://ShoppersDestination.in/frontassets/images/logo/logo.png" alt="Shoppers Destination Logo" width="160" style="display: inline-block; margin-bottom: 30px;">
                             
                             <!-- Welcome Icon -->
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">

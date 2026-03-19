@@ -724,11 +724,10 @@
                                 <span class="price current-price">Rs.<?= $data->price ?></span>
                                 <p class="description"><?= $data->short_desc ?></p>
                                 <div class="list-product-btn">
-                                    <a href="#quick_add" data-bs-toggle="modal" class="box-icon quick-add style-3 hover-tooltip"><span class="icon icon-bag"></span><span class="tooltip">Quick add</span></a>
+                                    <a href="" data-bs-toggle="modal" class="box-icon quick-add style-3 hover-tooltip"><span class="icon icon-bag"></span><span class="tooltip">Quick add</span></a>
                                     <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon wishlist style-3 hover-tooltip"><span class="icon icon-heart"></span> <span class="tooltip">Add to Wishlist</span></a>
                                 </div>
                             </div>
-                        </div>
                         <?php }}}} ?>
 
                 <!-- pagination -->
