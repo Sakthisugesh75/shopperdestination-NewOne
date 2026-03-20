@@ -328,13 +328,14 @@ class FrontendController extends Controller{
       function user_history(){
         $user_id = session('user_id');
         $item=$this->morder->getorderByuserid($user_id);
-        foreach ($item['data'] as $key => $value) {
+       
+        if($item['status'] == 'S') {
+             foreach ($item['data'] as $key => $value) {
             $value->id=$value->id?$this->helper->encodeData($value->id):null;
         }
-        if($item['status'] == 'S') {
             $this->data['record']=$item['data'];
             }else{
-              $this->data['record']="";
+              $this->data['record']= [];
           }
         return view('frontend.user.myorders', $this->data);
       }
