@@ -710,7 +710,7 @@
         <!-- Section Header -->
         <div class="section-header-premium mb-4 mb-lg-5 wow fadeInUp" data-wow-delay="0s">
             <span class="badge-label">Fresh Drops</span>
-            <h2 class="section-title fs-2 fs-md-1 mb-3">New Arrivals</h2>
+            <h2 class="section-title fs-2 fs-md-1 mb-3 id=newarrival">New Arrivals</h2>
             <p class="section-desc fs-6 mx-auto px-3 px-md-0" style="max-width: 550px;">
                 The latest fashion must-haves curated just for you
             </p>
@@ -864,8 +864,8 @@
 <!-- ========================================
      TRENDING PRODUCTS SECTION
      ======================================== -->
-<section class="section-premium bg-light-gradient py-5 py-lg-6">
-    <div class="container position-relative">
+{{-- <section class="section-premium bg-light-gradient py-5 py-lg-6">
+     <div class="container position-relative">
         <!-- Section Header -->
         <div class="section-header-premium mb-4 mb-lg-5 wow fadeInUp" data-wow-delay="0s">
             <span class="badge-label">Trending Now</span>
@@ -943,7 +943,11 @@
             <div class="sw-dots style-2 sw-pagination-product justify-content-center mt-4"></div>
         </div>
     </div>
-</section>
+</section> --}}
+
+
+@include('frontend.trending')
+
 
 <!-- ========================================
      FEATURES SECTION

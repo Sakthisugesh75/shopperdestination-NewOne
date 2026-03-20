@@ -32,10 +32,10 @@
                                 Premium essentials designed for the modern individual.
                             </p>
                             <div class="d-flex flex-column flex-md-row gap-3 justify-content-center">
-                                <a href="<?= url('/shop') ?>" class="btn btn-light btn-lg rounded-0 fw-bold px-5 py-3 shadow-sm transition-all">
+                                <a href="<?= url('/') ?>/user-product/czoxOiIwIjs" class="btn btn-light btn-lg rounded-0 fw-bold px-5 py-3 shadow-sm transition-all">
                                     SHOP NEW ARRIVALS
                                 </a>
-                                <a href="<?= url('/collections') ?>" class="btn btn-outline-light btn-lg rounded-0 fw-bold px-5 py-3 transition-all border-2">
+                                <a href="<?= url('/') ?>/trending" class="btn btn-outline-light btn-lg rounded-0 fw-bold px-5 py-3 transition-all border-2">
                                     EXPLORE COLLECTION
                                 </a>
                             </div>
