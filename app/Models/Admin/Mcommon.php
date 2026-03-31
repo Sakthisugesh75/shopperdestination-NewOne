@@ -131,7 +131,7 @@ class Mcommon extends Model
 public function register($firstname,$lastname,$email,$phone,$address,$country,$state,$city,$pincode)  {
     $i_status='E';
     $this->users->where('username', $this->helper->encrypt($email));
-    $item=$this->users->get()->first();
+    $item=$this->users->first();
     if(empty($item)){
         $user_data=array(
           'username'  => $this->helper->encrypt($email),
