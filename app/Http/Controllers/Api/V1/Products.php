@@ -182,15 +182,25 @@ class Products extends Controller
             $media_ext = array_pop($tmp);
             if ($media_ext == 'gif' || $media_ext == 'jpg' || $media_ext == 'jpeg' || $media_ext == 'png' || $media_ext == 'PNG') {
             $file_name = md5("product|media|" . date('Y-m-d H:i:s'));
-            $target_dir = "cdn/product/o/".$id;
-            $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
-            if ($return['status'] == 'S') {
-            $m_target_dir = "cdn/product/m/".$id;
-            $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 500, 800); //resize the image
-            $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
-            } else {
-            $invalid_image_format = true;
-            }
+              // $target_dir = "cdn/product_images/o/".$id;
+                  // $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                  // if ($return['status'] == 'S') {
+                  // $m_target_dir = "cdn/product/m/".$id;
+                  // $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
+                  // $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  // } else {
+                  // $invalid_image_format = true;
+                  // }
+                  $target_dir   = "cdn/product/o/".$id;
+                  $return       = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+
+                  if ($return['status'] == 'S') {
+                      $m_target_dir = "cdn/product/m/".$id; // <- important
+                      $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500);
+                      $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  } else {
+                  $invalid_image_format = true;
+                  }
             } else {
             $invalid_image_format = true;
             }
@@ -213,18 +223,28 @@ class Products extends Controller
               $media_ext = array_pop($tmp);
               if ($media_ext == 'gif' || $media_ext == 'jpg' || $media_ext == 'jpeg' || $media_ext == 'png' || $media_ext == 'PNG') {
                   $file_name = md5("product_images|" . date('Y-m-d H:i:s').$k);
-                  $target_dir = "cdn/product_images/o/".$id;
-                  $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                   // $target_dir = "cdn/product_images/o/".$id;
+                  // $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                  // if ($return['status'] == 'S') {
+                  // $m_target_dir = "cdn/product/m/".$id;
+                  // $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
+                  // $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  // } else {
+                  // $invalid_image_format = true;
+                  // }
+                  $target_dir   = "cdn/product_images/o/".$id;
+                  $return       = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+
                   if ($return['status'] == 'S') {
-                  $m_target_dir = "cdn/product/m/".$id;
-                  $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
-                  $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                      $m_target_dir = "cdn/product_images/m/".$id; // <- important
+                      $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500);
+                      $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
                   } else {
                   $invalid_image_format = true;
                   }
-                  } else {
-                  $invalid_image_format = true;
-                  }
+            } else {
+            $invalid_image_format = true;
+            }
                   if (!empty($image_url)) {
 
                       $this->mproducts->upload_product_images($image_url, $id);
@@ -304,15 +324,25 @@ class Products extends Controller
             $media_ext = array_pop($tmp);
             if ($media_ext == 'gif' || $media_ext == 'jpg' || $media_ext == 'jpeg' || $media_ext == 'png' || $media_ext == 'PNG') {
             $file_name = md5("product|media|" . date('Y-m-d H:i:s'));
-            $target_dir = "cdn/product/o/".$id;
-            $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
-            if ($return['status'] == 'S') {
-            $m_target_dir = "cdn/product/m/".$id;
-            $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 500, 800); //resize the image
-            $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
-            } else {
-            $invalid_image_format = true;
-            }
+                  // $target_dir = "cdn/product_images/o/".$id;
+                  // $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                  // if ($return['status'] == 'S') {
+                  // $m_target_dir = "cdn/product/m/".$id;
+                  // $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
+                  // $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  // } else {
+                  // $invalid_image_format = true;
+                  // }
+                  $target_dir   = "cdn/product/o/".$id;
+                  $return       = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+
+                  if ($return['status'] == 'S') {
+                      $m_target_dir = "cdn/product/m/".$id; // <- important
+                      $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500);
+                      $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  } else {
+                  $invalid_image_format = true;
+                  }
             } else {
             $invalid_image_format = true;
             }
@@ -335,18 +365,28 @@ class Products extends Controller
               $media_ext = array_pop($tmp);
               if ($media_ext == 'gif' || $media_ext == 'jpg' || $media_ext == 'jpeg' || $media_ext == 'png' || $media_ext == 'PNG') {
                   $file_name = md5("product_images|" . date('Y-m-d H:i:s').$k);
-                  $target_dir = "cdn/product_images/o/".$id;
-                  $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                        // $target_dir = "cdn/product_images/o/".$id;
+                  // $return = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+                  // if ($return['status'] == 'S') {
+                  // $m_target_dir = "cdn/product/m/".$id;
+                  // $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
+                  // $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                  // } else {
+                  // $invalid_image_format = true;
+                  // }
+                  $target_dir   = "cdn/product_images/o/".$id;
+                  $return       = $this->helper->saveCdn($media_ext, $media_tmp_name, $media_error, $file_name, $target_dir);
+
                   if ($return['status'] == 'S') {
-                  $m_target_dir = "cdn/product/m/".$id;
-                  $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500); //resize the image
-                  $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
+                      $m_target_dir = "cdn/product_images/m/".$id; // <- important
+                      $this->helper->imageCrop($return['url'], $m_target_dir, $file_name, $media_ext, 1000, 1500);
+                      $image_url = $m_target_dir . '/' . $file_name . '.' . $media_ext;
                   } else {
                   $invalid_image_format = true;
                   }
-                  } else {
-                  $invalid_image_format = true;
-                  }
+            } else {
+            $invalid_image_format = true;
+            }
                   if (!empty($image_url)) {
 
                       $this->mproducts->upload_product_images($image_url, $id);

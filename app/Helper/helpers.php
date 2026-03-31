@@ -186,19 +186,48 @@ class Helper {
     }
     return array('status'=>'E','url'=>'','ext'=> '');
   }
-    function imageCrop($original_image, $target_dir, $file_name, $ext, $width, $height){
-    if($this->verifyUploadDirectory($target_dir)){
-      $upload_file_path="./$target_dir/$file_name.$ext";
-      $i=1;
-      while(file_exists($upload_file_path)){
-        $upload_file_path="./$target_dir/$file_name-$i.$ext";
-        ++$i;
-      }
-      if (copy($original_image, $upload_file_path)) {
-        $this->resizeImage($upload_file_path, $width, $height, ".".$ext);
-      }
+  //   function imageCrop($original_image, $target_dir, $file_name, $ext, $width, $height){
+  //   if($this->verifyUploadDirectory($target_dir)){
+  //     $upload_file_path="./$target_dir/$file_name.$ext";
+  //     $i=1;
+  //     while(file_exists($upload_file_path)){
+  //       $upload_file_path="./$target_dir/$file_name-$i.$ext";
+  //       ++$i;
+  //     }
+  //     if (copy($original_image, $upload_file_path)) {
+  //       $this->resizeImage($upload_file_path, $width, $height, ".".$ext);
+  //     }
+  //   }
+  // }
+
+  function imageCrop($original_image, $target_dir, $file_name, $ext, $width, $height)
+{
+    // make sure the destination directory exists
+    if ($this->verifyUploadDirectory($target_dir)) {
+
+        // Ensure source has ./ and actually exists
+        $src = './' . ltrim($original_image, './');
+
+        if (!file_exists($src)) {
+            // You can log this instead of echo
+            // error_log("Source image not found: " . $src);
+            return;
+        }
+
+        // Build destination path
+        $upload_file_path = "./$target_dir/$file_name.$ext";
+        $i = 1;
+        while (file_exists($upload_file_path)) {
+            $upload_file_path = "./$target_dir/$file_name-$i.$ext";
+            ++$i;
+        }
+
+        // Copy and then resize
+        if (copy($src, $upload_file_path)) {
+            $this->resizeImage($upload_file_path, $width, $height, ".".$ext);
+        }
     }
-  }
+}
 
     function verifyUploadDirectory($path){
     $dir=explode("/",$path);
