@@ -236,6 +236,7 @@ class FrontendController extends Controller{
         function shipping_policy(){
         return view('frontend.common.shipping', $this->data);
       }
+    
 
       function user_login(){
         $session_id = session('session_id');

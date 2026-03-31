@@ -864,7 +864,7 @@
 <!-- ========================================
      TRENDING PRODUCTS SECTION
      ======================================== -->
-{{-- <section class="section-premium bg-light-gradient py-5 py-lg-6">
+<section class="section-premium bg-light-gradient py-5 py-lg-6" id="trending">
      <div class="container position-relative">
         <!-- Section Header -->
         <div class="section-header-premium mb-4 mb-lg-5 wow fadeInUp" data-wow-delay="0s">
@@ -943,10 +943,9 @@
             <div class="sw-dots style-2 sw-pagination-product justify-content-center mt-4"></div>
         </div>
     </div>
-</section> --}}
+</section>
 
 
-@include('frontend.trending')
 
 
 <!-- ========================================

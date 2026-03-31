@@ -45,7 +45,6 @@ Route::any('cart', [Controllers\User\FrontendController::class, 'user_cart']);
 Route::any('checkout', [Controllers\User\FrontendController::class, 'checkout']);
 
 
-Route::any('trending', [Controllers\User\FrontendController::class, 'trending']);
 
 Route::any('user-product/{key}', [Controllers\User\FrontendController::class, 'product']);
 Route::any('user-product-detail/{key}', [Controllers\User\FrontendController::class, 'product_detail']);

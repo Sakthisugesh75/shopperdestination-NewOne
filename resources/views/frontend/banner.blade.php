@@ -35,7 +35,7 @@
                                 <a href="<?= url('/') ?>/user-product/czoxOiIwIjs" class="btn btn-light btn-lg rounded-0 fw-bold px-5 py-3 shadow-sm transition-all">
                                     SHOP NEW ARRIVALS
                                 </a>
-                                <a href="<?= url('/') ?>/trending" class="btn btn-outline-light btn-lg rounded-0 fw-bold px-5 py-3 transition-all border-2">
+                                <a href="<?= url('/') ?>/#trending" class="btn btn-outline-light btn-lg rounded-0 fw-bold px-5 py-3 transition-all border-2">
                                     EXPLORE COLLECTION
                                 </a>
                             </div>
