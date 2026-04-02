@@ -52,7 +52,7 @@
                     <br> North Uthukuli Road,
                     <br>Tiruppur 641607.
                     <br> <span>Email:</span> contact@shopperdestination.com
-                    <br> <span>Phone:</span> (+91) 934 214 2087
+                    <br> <span>Phone:</span> (+91) 934 509 9157
                 </address>
             </div>
             <div class="col-xl-3 col-lg-4 col-sm-6">

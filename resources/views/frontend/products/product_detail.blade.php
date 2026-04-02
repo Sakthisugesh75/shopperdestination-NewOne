@@ -1198,13 +1198,10 @@ exit;
                             <i class="icon-safe"></i>
                             <p>Guarantee Safe<br>Checkout</p>
                         </div>
-                        <div class="payment-icons">
-                            <img src="<?= url('/') ?>/frontassets/images/payments/visa.png" alt="Visa">
-                            <img src="<?= url('/') ?>/frontassets/images/payments/img-1.png" alt="Payment">
-                            <img src="<?= url('/') ?>/frontassets/images/payments/img-2.png" alt="Payment">
-                            <img src="<?= url('/') ?>/frontassets/images/payments/img-3.png" alt="Payment">
-                            <img src="<?= url('/') ?>/frontassets/images/payments/img-4.png" alt="Payment">
-                        </div>
+                        <div class="tf-payment">
+                                        <img src="<?= url('/') ?>/frontassets/images/payments/img.png" alt="image">
+                                      
+                                    </div>
                     </div>
                 </div>
             </div>
@@ -1221,9 +1218,9 @@ exit;
                 <li class="tab-item item-title active">
                     <span class="tab-link inner">Description</span>
                 </li>
-                <li class="tab-item item-title">
+                {{-- <li class="tab-item item-title">
                     <span class="tab-link inner">Additional Information</span>
-                </li>
+                </li> --}}
                 <li class="tab-item item-title">
                     <span class="tab-link inner">Reviews</span>
                 </li>
@@ -1239,7 +1236,7 @@ exit;
                 </div>
                 
                 <!-- Additional Info Tab -->
-                <div class="tab-pane widget-content-inner">
+                {{-- <div class="tab-pane widget-content-inner">
                     <table class="info-table">
                         <tbody>
                             <tr>
@@ -1252,7 +1249,7 @@ exit;
                             </tr>
                         </tbody>
                     </table>
-                </div>
+                </div> --}}
                 
                 <!-- Reviews Tab -->
                 <div class="tab-pane widget-content-inner">
