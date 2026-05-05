@@ -431,10 +431,22 @@
 }
 
 .wrapper-shop.premium-list .card-product-info .price {
+    display: block;
+}
+
+.wrapper-shop.premium-list .card-product-info .brand-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.wrapper-shop.premium-list .card-product-info .price {
     font-family: 'Playfair Display', serif !important;
-    font-size: 24px !important;
-    font-weight: 600 !important;
-    color: #1a1a3e !important;
+    font-size: 22px !important;
+    font-weight: 700 !important;
+    color: #0c0c1e !important;
     margin-bottom: 16px;
     display: block;
 }
@@ -665,10 +677,10 @@
         <div class="wrapper-control-shop">
             <div class="tf-list-layout wrapper-shop premium-list" id="listLayout" style="display:none">
                 <?php
-                if($category == '0'){
-                    // echo 'category-0';
                 if(!empty($products)){
-                    foreach ($products as $key => $data) { ?>
+                    foreach ($products as $key => $data) { 
+                        if($category == '0' || $category == $data->category_name){
+                ?>
                 <!-- card product 1 -->
                 <div class="card-product list-layout" data-availability="In stock" data-brand="Ecomus">
                     <div class="card-product-wrapper">
@@ -685,8 +697,7 @@
                     </div>
                     <div class="card-product-info">
                         <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="title link"><?=$data->color_name ?> <?= $data->product_name ?></a>
-                        
-                        
+                        <span class="brand-text"><?= $data->sub_category_name ?></span>
                         <span class="price current-price">Rs.<?= $data->price ?></span>
                         <p class="description"><?= $data->short_desc ?></p>
                         <div class="list-product-btn">
@@ -695,66 +706,14 @@
                         </div>
                     </div>
                 </div>
-                <?php }} }else{
-                    // echo 'category';
-                        if(!empty($products)){
-                        foreach ($products as $key => $data) {
-                        // echo $category;
-                        // echo $data->category_name;
-                        if($category == $data->category_name ){
-                        ?>
-                        <div class="card-product list-layout" data-availability="In stock" data-brand="Ecomus">
-                            <div class="card-product-wrapper">
-                                <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="product-img">
-                                    <?php if($data->image_url == null){ ?>
-                                         <span class="badge-bestseller"><?= $data->sub_category_name?></span>
-                                    <img class="lazyload img-product" data-src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" alt="image-product">
-                                    <img class="lazyload img-hover" data-src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" alt="image-product">
-                                    <?php }else{ ?>
-                                        <img class="lazyload img-product" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                                    <img class="lazyload img-hover" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                                    <?php } ?>
-                                </a>
-                            </div>
-                            <div class="card-product-info">
-                                
-                                
-                                <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="title link"><?=$data->color_name ?> <?= $data->product_name ?></a>
-                              
-                                <span class="price current-price">Rs.<?= $data->price ?></span>
-                                <p class="description"><?= $data->short_desc ?></p>
-                                <div class="list-product-btn">
-                                    <a href="" data-bs-toggle="modal" class="box-icon quick-add style-3 hover-tooltip"><span class="icon icon-bag"></span><span class="tooltip">Quick add</span></a>
-                                    <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon wishlist style-3 hover-tooltip"><span class="icon icon-heart"></span> <span class="tooltip">Add to Wishlist</span></a>
-                                </div>
-                            </div>
-                        <?php }}}} ?>
-
-                <!-- pagination -->
-                <ul class="wg-pagination tf-pagination-list premium-pagination justify-content-start">
-                    <li class="active">
-                        <a href="#" class="pagination-link">1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">2</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">
-                            <span class="icon icon-arrow-right"></span>
-                        </a>
-                    </li>
-                </ul>
+                <?php }}} ?>
             </div>
             <div class="tf-grid-layout wrapper-shop tf-col-4 premium-grid" id="gridLayout" style="display:grid">
                 <?php
-                if($category == '0'){
-                    // echo 'category-0';
                 if(!empty($products)){
-                    foreach ($products as $key => $data) { ?>
-
+                    foreach ($products as $key => $data) { 
+                        if($category == '0' || $category == $data->category_name){
+                ?>
                 <!-- card product 1 -->
                 <div class="card-product grid" data-availability="In stock" data-brand="Ecomus">
                     <div class="card-product-wrapper">
@@ -790,78 +749,33 @@
                     </div>
                     <div class="card-product-info">
                         <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="title link"><?=$data->color_name ?> <?= $data->product_name ?></a>
-                              
                         <span class="price current-price">Rs.<?= $data->price ?></span>
                     </div>
                 </div>
+                <?php }}} ?>
+            </div> <!-- end gridLayout -->
 
-                <?php }} }else{
-                    // echo 'category';
-                        if(!empty($products)){
-                        foreach ($products as $key => $data) {
-                        // echo $category;
-                        // echo $data->category_name;
-                        if($category == $data->category_name ){
-                        ?>
-                        <div class="card-product grid" data-availability="In stock" data-brand="Ecomus">
-                            <div class="card-product-wrapper">
-                                <div class="badge-bestseller"><?= $data->sub_category_name?></div>
-                                <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="product-img">
-                                    <?php if($data->image_url == null){ ?>
-                                    <img class="lazyload img-product" data-src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" alt="image-product">
-                                    <img class="lazyload img-hover" data-src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" alt="image-product">
-                                    <?php }else{ ?>
-                                        <img class="lazyload img-product" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                                    <img class="lazyload img-hover" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                                    <?php } ?>
-                                </a>
-                                <div class="list-product-btn absolute-2">
-                                    <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                        <span class="icon icon-bag"></span>
-                                        <span class="tooltip">Quick Add</span>
-                                    </a>
-                                    <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon bg_white wishlist btn-icon-action">
-                                        <span class="icon icon-heart"></span>
-                                        <span class="tooltip">Add to Wishlist</span>
-                                        <span class="icon icon-delete"></span>
-                                    </a>
-                                </div>
-                                <div class="quick-add-overlay">
-                                    <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="quick-add-btn">
-                                        <span class="icon icon-bag"></span>
-                                        Quick Shop
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="card-product-info">
-                                <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="title link"><?=$data->color_name ?> <?= $data->product_name ?></a>
-                               
-                                <span class="price current-price">Rs.<?= $data->price ?></span>
-                            </div>
-                        </div>
-                    <?php }}}} ?>
-
-                <!-- pagination -->
-                <ul class="wg-pagination tf-pagination-list premium-pagination">
-                    <li class="active">
-                        <a href="#" class="pagination-link">1</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">2</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">3</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">4</a>
-                    </li>
-                    <li>
-                        <a href="#" class="pagination-link animate-hover-btn">
-                            <span class="icon icon-arrow-right"></span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            <!-- consolidated pagination -->
+            <ul class="wg-pagination tf-pagination-list premium-pagination justify-content-center mt-5">
+                <li class="active">
+                    <a href="#" class="pagination-link">1</a>
+                </li>
+                <li>
+                    <a href="#" class="pagination-link animate-hover-btn">2</a>
+                </li>
+                <li>
+                    <a href="#" class="pagination-link animate-hover-btn">3</a>
+                </li>
+                <li>
+                    <a href="#" class="pagination-link animate-hover-btn">4</a>
+                </li>
+                <li>
+                    <a href="#" class="pagination-link animate-hover-btn">
+                        <span class="icon icon-arrow-right"></span>
+                    </a>
+                </li>
+            </ul>
+        </div> <!-- end wrapper-control-shop -->
 
         </div>
     </div>

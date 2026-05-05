@@ -40,7 +40,7 @@ class ETMSMTPEmail extends Mailable
             return $this->subject($this->details['subject'])->view("frontend.mail.reset-password");
 
         }else if($this->details["mail_type"] == "order-confirm"){
-        return $this->subject($this->details['subject'])->view("frontend.mail.order_confirm");
+        return $this->subject($this->details['subject'])->cc("shopperdestinationcare@gmail.com")->view("frontend.mail.order_confirm");
         }else{
             return $this->subject($this->details['subject'])->view("frontend.mail.registration");
         }

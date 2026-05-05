@@ -298,8 +298,8 @@ if ($(".tf-sw-collection").length > 0) {
     slidesPerGroup: 1,
     navigation: {
       clickable: true,
-      nextEl: ".nav-prev-collection",
-      prevEl: ".nav-next-collection",
+      nextEl: ".nav-next-collection",
+      prevEl: ".nav-prev-collection",
     },
     breakpoints: {
       768: {
@@ -311,6 +311,51 @@ if ($(".tf-sw-collection").length > 0) {
         slidesPerView: preview,
         spaceBetween: spacingLg,
         slidesPerGroup: 2,
+      },
+    },
+  });
+}
+
+if ($(".tf-sw-videos").length > 0) {
+  var preview = $(".tf-sw-videos").data("preview");
+  var tablet = $(".tf-sw-videos").data("tablet");
+  var mobile = $(".tf-sw-videos").data("mobile");
+  var spacingLg = $(".tf-sw-videos").data("space-lg");
+  var spacingMd = $(".tf-sw-videos").data("space-md");
+  var spacing = $(".tf-sw-videos").data("space");
+  var loop = $(".tf-sw-videos").data("loop");
+  var play = $(".tf-sw-videos").data("auto-play");
+  var swiper = new Swiper(".tf-sw-videos", {
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+      pauseOnMouseEnter: true,
+    },
+    autoplay: play,
+    slidesPerView: mobile,
+    loop: loop,
+    spaceBetween: spacing,
+    speed: 1000,
+    pagination: {
+      el: ".sw-pagination-videos",
+      clickable: true,
+    },
+    slidesPerGroup: 1,
+    navigation: {
+      clickable: true,
+      nextEl: ".nav-next-videos",
+      prevEl: ".nav-prev-videos",
+    },
+    breakpoints: {
+      768: {
+        slidesPerView: tablet,
+        spaceBetween: spacingMd,
+        slidesPerGroup: 1,
+      },
+      1150: {
+        slidesPerView: preview,
+        spaceBetween: spacingLg,
+        slidesPerGroup: 1,
       },
     },
   });
@@ -640,8 +685,8 @@ if ($(".tf-sw-product-sell").length > 0) {
     slidesPerGroup: perGroup,
     navigation: {
       clickable: true,
-      nextEl: ".nav-prev-product",
-      prevEl: ".nav-next-product",
+      nextEl: ".nav-next-product",
+      prevEl: ".nav-prev-product",
     },
     breakpoints: {
       768: {

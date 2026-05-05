@@ -651,10 +651,10 @@
             </div>
 
             <!-- Navigation -->
-            <div class="nav-sw nav-next-slider nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
+            <div class="nav-sw nav-prev-collection nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
                 <i class="fas fa-chevron-left"></i>
             </div>
-            <div class="nav-sw nav-prev-slider nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
+            <div class="nav-sw nav-next-collection nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
                 <i class="fas fa-chevron-right"></i>
             </div>
             <div class="sw-dots style-2 sw-pagination-collection d-flex justify-content-center mt-4"></div>
@@ -777,10 +777,10 @@
             </div>
             
             <!-- Navigation -->
-            <div class="nav-sw nav-next-slider nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
+            <div class="nav-sw nav-prev-product nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
                 <i class="fas fa-chevron-left"></i>
             </div>
-            <div class="nav-sw nav-prev-slider nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
+            <div class="nav-sw nav-next-product nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
                 <i class="fas fa-chevron-right"></i>
             </div>
             <div class="sw-dots style-2 sw-pagination-product justify-content-center mt-4"></div>
@@ -808,7 +808,7 @@
 
         <!-- Videos Swiper -->
         <div class="wrap-carousel position-relative px-2 px-lg-4">
-            <div dir="ltr" class="swiper tf-sw-collection" 
+            <div dir="ltr" class="swiper tf-sw-videos" 
                  data-preview="3" 
                  data-tablet="2" 
                  data-mobile="1" 
@@ -850,13 +850,13 @@
             </div>
             
             <!-- Navigation -->
-            <div class="nav-sw nav-next-slider nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
+            <div class="nav-sw nav-prev-videos nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
                 <i class="fas fa-chevron-left"></i>
             </div>
-            <div class="nav-sw nav-prev-slider nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
+            <div class="nav-sw nav-next-videos nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
                 <i class="fas fa-chevron-right"></i>
             </div>
-            <div class="sw-dots style-2 sw-pagination-collection d-flex justify-content-center mt-4"></div>
+            <div class="sw-dots style-2 sw-pagination-videos d-flex justify-content-center mt-4"></div>
         </div>
     </div>
 </section>
@@ -934,10 +934,10 @@
             </div>
             
             <!-- Navigation -->
-            <div class="nav-sw nav-next-slider nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
+            <div class="nav-sw nav-prev-product nav-btn-premium position-absolute top-50 start-0 translate-middle-y d-none d-lg-flex" style="left: -24px !important;">
                 <i class="fas fa-chevron-left"></i>
             </div>
-            <div class="nav-sw nav-prev-slider nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
+            <div class="nav-sw nav-next-product nav-btn-premium position-absolute top-50 end-0 translate-middle-y d-none d-lg-flex" style="right: -24px !important;">
                 <i class="fas fa-chevron-right"></i>
             </div>
             <div class="sw-dots style-2 sw-pagination-product justify-content-center mt-4"></div>
