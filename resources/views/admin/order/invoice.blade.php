@@ -47,11 +47,12 @@
   
 
 
-                    <span>Shopper Destination</span>
-                    <br> 24A, RS Puram Palayakadu,
-                    <br> North Uthukuli Road,
-                    <br>Tiruppur 641607.
-                    <br> <span>Email:</span> contact@shopperdestination.com
+                   <span>Shopper Destination</span>
+                   <span>Powered by Trend Export</span>
+                    <br>No.473/1-B-2,1st Floor,
+                    <br>Nallur Ring Road ,
+                    <br>Kovilvazhi,Tirupur-641 606
+                    <br> <span>Email:</span>shopperdestinationcare@gmail.com
                     <br> <span>Phone:</span> (+91) 934 509 9157
                 </address>
             </div>

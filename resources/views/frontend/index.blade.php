@@ -585,6 +585,16 @@
         height: 200px !important;
     }
 }
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    content: "";
+}
 </style>
 
 <!-- ========================================
@@ -623,20 +633,22 @@
                         <?php foreach ($categoryCnt as $key => $item): ?>
                             <div class="swiper-slide">
                                 <div class="category-card-premium wow fadeInUp" data-wow-delay="<?= ($key * 0.1) ?>s">
-                                    <div class="card-img-wrapper" style="height: 280px; height: clamp(220px, 40vw, 380px);">
-                                        <?php if($item->categoryimage == null): ?>
-                                            <img class="lazyload" 
-                                                 data-src="<?= url('/') ?>/frontassets/images/collections/collection-42.jpg" 
-                                                 src="<?= url('/') ?>/frontassets/images/collections/collection-42.jpg" 
-                                                 alt="<?= $item->category_name ?>">
-                                        <?php else: ?>
-                                            <img class="lazyload" 
-                                                 data-src="<?= url('/') ?>/<?= $item->categoryimage ?>" 
-                                                 src="<?= url('/') ?>/<?= $item->categoryimage ?>" 
-                                                 alt="<?= $item->category_name ?>">
-                                        <?php endif; ?>
-                                        <div class="card-overlay"></div>
-                                    </div>
+                                    <a href="<?= url('/') ?>/user-product/<?= $item->cat_name ?>" class="d-block h-100">
+                                        <div class="card-img-wrapper" style="height: 280px; height: clamp(220px, 40vw, 380px);">
+                                            <?php if($item->categoryimage == null): ?>
+                                                <img class="lazyload" 
+                                                     data-src="<?= url('/') ?>/frontassets/images/collections/collection-42.jpg" 
+                                                     src="<?= url('/') ?>/frontassets/images/collections/collection-42.jpg" 
+                                                     alt="<?= $item->category_name ?>">
+                                            <?php else: ?>
+                                                <img class="lazyload" 
+                                                     data-src="<?= url('/') ?>/<?= $item->categoryimage ?>" 
+                                                     src="<?= url('/') ?>/<?= $item->categoryimage ?>" 
+                                                     alt="<?= $item->category_name ?>">
+                                            <?php endif; ?>
+                                            <div class="card-overlay"></div>
+                                        </div>
+                                    </a>
                                     <div class="card-body-overlay p-3 p-md-4">
                                         <a href="<?= url('/') ?>/user-product/<?= $item->cat_name ?>" class="category-link">
                                             <span><?= $item->category_name ?></span>
@@ -731,7 +743,7 @@
                             <div class="swiper-slide" lazy="true">
                                 <div class="product-card-premium">
                                     <div class="product-img-wrapper" style="height: 220px; height: clamp(180px, 35vw, 320px);">
-                                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="d-block h-100">
+                                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="d-block h-100 stretched-link">
                                             <span class="badge-bestseller"><?= $data->sub_category_name?></span>
                                             <?php if($data->image_url == null): ?>
                                               
@@ -890,7 +902,7 @@
                             <div class="swiper-slide" lazy="true">
                                 <div class="product-card-premium">
                                     <div class="product-img-wrapper" style="height: 220px; height: clamp(180px, 35vw, 320px);">
-                                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="d-block h-100">
+                                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="d-block h-100 stretched-link">
                                             <span class="badge-bestseller"><?= $data->sub_category_name?></span>
                                             <?php if($data->image_url == null): ?>
                                                 <img class="lazyload" 

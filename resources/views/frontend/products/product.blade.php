@@ -176,7 +176,6 @@
 .wrapper-shop .card-product-wrapper .product-img {
     display: block;
     width: 100%;
-    height: 100%;
 }
 
 .wrapper-shop .card-product-wrapper img {
@@ -634,6 +633,16 @@
         padding: 20px;
     }
 }
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    content: "";
+}
 </style>
 
 <!-- page-title -->
@@ -684,7 +693,7 @@
                 <!-- card product 1 -->
                 <div class="card-product list-layout" data-availability="In stock" data-brand="Ecomus">
                     <div class="card-product-wrapper">
-                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="product-img">
+                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="product-img stretched-link">
                             <?php if($data->image_url == null){ ?>
                                  <span class="badge-bestseller"><?= $data->sub_category_name?></span>
                             <img class="lazyload img-product" data-src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" alt="image-product">
@@ -701,7 +710,7 @@
                         <span class="price current-price">Rs.<?= $data->price ?></span>
                         <p class="description"><?= $data->short_desc ?></p>
                         <div class="list-product-btn">
-                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon quick-add style-3 hover-tooltip"><span class="icon icon-bag"></span><span class="tooltip">Quick add</span></a>
+                            <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="box-icon quick-add style-3 hover-tooltip"><span class="icon icon-bag"></span><span class="tooltip">Quick add</span></a>
                             <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon wishlist style-3 hover-tooltip"><span class="icon icon-heart"></span> <span class="tooltip">Add to Wishlist</span></a>
                         </div>
                     </div>
@@ -716,42 +725,48 @@
                 ?>
                 <!-- card product 1 -->
                 <div class="card-product grid" data-availability="In stock" data-brand="Ecomus">
-                    <div class="card-product-wrapper">
-                        <div class="badge-bestseller"><?= $data->sub_category_name?></div>
-                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="product-img">
-                            <?php if($data->image_url == null){ ?>
-                             <span class="badge-bestseller"><?= $data->sub_category_name?></span>
-                            <img class="lazyload img-product" data-src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" alt="image-product">
-                            <img class="lazyload img-hover" data-src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" src="<?= url('/') ?>/frontassets/images/products/white-1.jpg" alt="image-product">
-                            <?php }else{ ?>
-                                <img class="lazyload img-product" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                            <img class="lazyload img-hover" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
-                            <?php } ?>
-                        </a>
-                        <div class="list-product-btn absolute-2">
-                            <a href="#quick_add" data-bs-toggle="modal" class="box-icon bg_white quick-add tf-btn-loading">
-                                <span class="icon icon-bag"></span>
-                                <span class="tooltip">Quick Add</span>
-                            </a>
-                            <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon bg_white wishlist btn-icon-action">
-                                <span class="icon icon-heart"></span>
-                                <span class="tooltip">Add to Wishlist</span>
-                                <span class="icon icon-delete"></span>
-                            </a>
-                        </div>
-                        <div class="quick-add-overlay">
-                             <div class="badge-bestseller"><?= $data->sub_category_name?></div>
-                            <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="quick-add-btn">
-                                <span class="icon icon-bag"></span>
-                                Quick Shop
-                            </a>
-                        </div>
-                    </div>
-                    <div class="card-product-info">
-                        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?=$data->color ?>" class="title link"><?=$data->color_name ?> <?= $data->product_name ?></a>
-                        <span class="price current-price">Rs.<?= $data->price ?></span>
-                    </div>
-                </div>
+    <div class="card-product-wrapper">
+        <div class="badge-bestseller"><?= $data->sub_category_name ?></div>
+
+        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?= $data->color ?>" class="product-img">
+            <?php if($data->image_url == null){ ?>
+                <img class="lazyload img-product" data-src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" src="<?= url('/') ?>/frontassets/images/products/orange-1.jpg" alt="image-product">
+                <img class="lazyload img-hover"   data-src="<?= url('/') ?>/frontassets/images/products/white-1.jpg"  src="<?= url('/') ?>/frontassets/images/products/white-1.jpg"  alt="image-product">
+            <?php } else { ?>
+                <img class="lazyload img-product" data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
+                <img class="lazyload img-hover"   data-src="<?= url('/') ?>/<?= $data->image_url ?>" src="<?= url('/') ?>/<?= $data->image_url ?>" alt="image-product">
+            <?php } ?>
+        
+
+        <div class="list-product-btn absolute-2">
+            <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?= $data->color ?>" class="box-icon bg_white quick-add tf-btn-loading">
+                <span class="icon icon-bag"></span>
+                <span class="tooltip">Quick Add</span>
+            </a>
+            <a href="javascript:void(0);" onclick="addToWishlist(<?= $data->id ?>)" class="box-icon bg_white wishlist btn-icon-action">
+                <span class="icon icon-heart"></span>
+                <span class="tooltip">Add to Wishlist</span>
+                <span class="icon icon-delete"></span>
+            </a>
+        </div>
+
+        <div class="quick-add-overlay">
+            <div class="badge-bestseller"><?= $data->sub_category_name ?></div>
+            <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?= $data->color ?>" class="quick-add-btn">
+                <span class="icon icon-bag"></span>
+                Quick Shop
+            </a>
+        </div>
+        </a>
+    </div> <!-- end card-product-wrapper -->
+
+    <div class="card-product-info">
+        <a href="<?= url('/') ?>/product/<?= $data->slug ?>/<?= $data->color ?>" class="title link">
+            <?= $data->color_name ?> <?= $data->product_name ?>
+        </a>
+        <span class="price current-price">Rs.<?= $data->price ?></span>
+    </div>
+</div>
                 <?php }}} ?>
             </div> <!-- end gridLayout -->
 
