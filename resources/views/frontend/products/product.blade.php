@@ -1,4 +1,17 @@
 @extends('frontend.main')
+
+@section('fb_track')
+@if(request()->filled('search'))
+<script>
+fbq('track', 'Search', {
+    search_string: @json(request('search')),
+    content_type: 'product',
+    currency: 'INR'
+});
+</script>
+@endif
+@endsection
+
 @section('content')
 
 <style>

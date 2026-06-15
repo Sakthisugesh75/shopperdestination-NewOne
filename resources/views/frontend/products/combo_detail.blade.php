@@ -4,8 +4,9 @@
 <script>
 fbq('track', 'ViewContent', {
     content_ids: ['{{ $products->id }}'],
-    content_name: @json($products->combo_name),
     content_type: 'product',
+    content_name: @json($products->combo_name),
+    content_category: 'Combo',
     value: {{ (float) $products->price }},
     currency: 'INR'
 });
@@ -792,10 +793,11 @@ function addtocart(id) {
                 if (typeof fbq === 'function') {
                     fbq('track', 'AddToCart', {
                         content_ids: ['{{ $products->id }}'],
-                        content_name: @json($products->combo_name),
                         content_type: 'product',
+                        content_name: @json($products->combo_name),
                         value: {{ (float) $products->price }},
-                        currency: 'INR'
+                        currency: 'INR',
+                        num_items: 1
                     });
                 }
                 Swal.fire({
@@ -826,6 +828,15 @@ function addToWishlist(id) {
         data: { 'prod_id': id },
         success: function(data) {
             if (data.status == "SUCCESS") {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'AddToWishlist', {
+                        content_ids: ['{{ $products->id }}'],
+                        content_type: 'product',
+                        content_name: @json($products->combo_name),
+                        value: {{ (float) $products->price }},
+                        currency: 'INR'
+                    });
+                }
                 Swal.fire({
                     title: 'Added to Wishlist!',
                     text: 'Combo has been added to your wishlist',

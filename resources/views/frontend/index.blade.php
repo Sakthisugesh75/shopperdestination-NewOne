@@ -1,4 +1,22 @@
 @extends('frontend.main')
+
+@section('fb_track')
+<?php
+$fb_ids = [];
+if (!empty($products)) {
+    foreach ($products as $fb_p) { $fb_ids[] = (string) $fb_p->id; }
+}
+?>
+<script>
+fbq('track', 'Products', {
+    content_ids: <?php echo json_encode($fb_ids); ?>,
+    content_type: 'product',
+    value: "",
+    currency: 'INR'
+});
+</script>
+@endsection
+
 @section('content')
 
 @include('frontend.banner')

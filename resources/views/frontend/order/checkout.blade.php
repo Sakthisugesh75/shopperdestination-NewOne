@@ -1,14 +1,5 @@
 @extends('frontend.main')
 
-@section('fb_track')
-<script>
-fbq('track', 'InitiateCheckout', {
-    value: {{ (float) $subtotal + (float) $deliverycharge }},
-    currency: 'INR'
-});
-</script>
-@endsection
-
 @section('content')
 
 <style>
@@ -520,7 +511,23 @@ fbq('track', 'InitiateCheckout', {
                 $subtotal = collect($cart)->sum('price');
                 $deliverycharge = 50.00;
                 $net = $subtotal + $deliverycharge;
+                $fb_cart_ids = collect($cart)->pluck('product_id')->map(function ($id) { return (string) $id; })->values();
+                $fb_num_items = (int) collect($cart)->sum('quantity');
             @endphp
+
+            @if(!empty($cart))
+            <script>
+            if (typeof fbq === 'function') {
+                fbq('track', 'InitiateCheckout', {
+                    content_ids: {!! $fb_cart_ids->toJson() !!},
+                    content_type: 'product',
+                    num_items: {{ $fb_num_items }},
+                    value: {{ (float) $net }},
+                    currency: 'INR'
+                });
+            }
+            </script>
+            @endif
 
             <!-- Order Summary -->
             <div class="order-summary-card tf-page-cart-footer">
@@ -705,17 +712,30 @@ if (fullname != "" && address != "" && postcode != "" && city != "" && state != 
                                  // alert("successfully ordered");
                                              console.log(data);
 
+                                             var redirectUrl = "<?php echo url('/'); ?>/my-profile";
+
                                              if (typeof fbq === 'function') {
+                                                 // Fire Purchase, then redirect via the eventCallback
+                                                 // so the pixel request is sent before navigation.
+                                                 var redirected = false;
+                                                 var go = function() {
+                                                     if (redirected) return;
+                                                     redirected = true;
+                                                     window.location.href = redirectUrl;
+                                                 };
                                                  fbq('track', 'Purchase', {
+                                                     content_ids: {!! $fb_cart_ids->toJson() !!},
+                                                     content_type: 'product',
                                                      value: parseFloat(amount),
                                                      currency: 'INR',
-                                                     content_type: 'product',
-                                                     transaction_id: order_id
-                                                 });
+                                                     num_items: {{ $fb_num_items }},
+                                                     order_id: order_id
+                                                 }, { eventCallback: go });
+                                                 // Fallback in case the callback never fires.
+                                                 setTimeout(go, 1200);
+                                             } else {
+                                                 window.location.href = redirectUrl;
                                              }
-
-                                             window.location.href =
-                                                 "<?php echo url('/'); ?>/my-profile";
 
                                                         // Swal.fire({
                                                         //     title: "Thanks for your purchase! We've emailed your order details to you.",
@@ -744,6 +764,15 @@ if (fullname != "" && address != "" && postcode != "" && city != "" && state != 
                         "color": "#667eea"
                     }
                 };
+                if (typeof fbq === 'function') {
+                    fbq('track', 'AddPaymentInfo', {
+                        content_ids: {!! $fb_cart_ids->toJson() !!},
+                        content_type: 'product',
+                        value: parseFloat(amount),
+                        currency: 'INR'
+                    });
+                }
+
                 var rzp1 = new Razorpay(options);
                 rzp1.open();
 

@@ -4,8 +4,9 @@
 <script>
 fbq('track', 'ViewContent', {
     content_ids: ['{{ $products->id }}'],
-    content_name: @json($products->product_name),
     content_type: 'product',
+    content_name: @json($products->product_name),
+    content_category: @json($products->sub_category_name),
     value: {{ (float) $products->price }},
     currency: 'INR'
 });
@@ -1482,10 +1483,11 @@ function addtocart(id) {
                     if (typeof fbq === 'function') {
                         fbq('track', 'AddToCart', {
                             content_ids: ['{{ $products->id }}'],
-                            content_name: @json($products->product_name),
                             content_type: 'product',
+                            content_name: @json($products->product_name),
                             value: {{ (float) $products->price }},
-                            currency: 'INR'
+                            currency: 'INR',
+                            num_items: 1
                         });
                     }
                     window.location.href = "<?php echo url('/'); ?>/cart";
@@ -1519,6 +1521,15 @@ function addToWishlist(id) {
             success: function(data) {
                 console.log(data);
                 if (data.status == "SUCCESS") {
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'AddToWishlist', {
+                            content_ids: ['{{ $products->id }}'],
+                            content_type: 'product',
+                            content_name: @json($products->product_name),
+                            value: {{ (float) $products->price }},
+                            currency: 'INR'
+                        });
+                    }
                     Swal.fire({
                         title: 'Product Add to Wishlist Successfully',
                         icon: 'success',
