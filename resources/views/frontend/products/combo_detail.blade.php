@@ -1,4 +1,17 @@
 @extends('frontend.main')
+
+@section('fb_track')
+<script>
+fbq('track', 'ViewContent', {
+    content_ids: ['{{ $products->id }}'],
+    content_name: @json($products->combo_name),
+    content_type: 'product',
+    value: {{ (float) $products->price }},
+    currency: 'INR'
+});
+</script>
+@endsection
+
 @section('content')
 
 <style>
@@ -776,6 +789,15 @@ function addtocart(id) {
         data: { 'id': id },
         success: function(data) {
             if (data.status == "SUCCESS") {
+                if (typeof fbq === 'function') {
+                    fbq('track', 'AddToCart', {
+                        content_ids: ['{{ $products->id }}'],
+                        content_name: @json($products->combo_name),
+                        content_type: 'product',
+                        value: {{ (float) $products->price }},
+                        currency: 'INR'
+                    });
+                }
                 Swal.fire({
                     title: 'Added to Cart!',
                     text: 'Combo has been added to your cart',

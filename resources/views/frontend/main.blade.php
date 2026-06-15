@@ -40,6 +40,9 @@
     src="https://www.facebook.com/tr?id=1740595333570247&ev=PageView&noscript=1"
     /></noscript>
     <!-- End Meta Pixel Code -->
+
+    <!-- Meta Pixel - per-page event slot (e.g. ViewContent, Purchase). PageView already fires above. -->
+    @yield('fb_track')
 </head>
 
 <body class="preload-wrapper">

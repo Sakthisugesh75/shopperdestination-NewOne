@@ -1,4 +1,17 @@
 @extends('frontend.main')
+
+@section('fb_track')
+<script>
+fbq('track', 'ViewContent', {
+    content_ids: ['{{ $products->id }}'],
+    content_name: @json($products->product_name),
+    content_type: 'product',
+    value: {{ (float) $products->price }},
+    currency: 'INR'
+});
+</script>
+@endsection
+
 @section('content')
 {{-- <?php print_r($products);
 exit;
@@ -1466,6 +1479,15 @@ function addtocart(id) {
             success: function(data) {
                 console.log(data);
                 if (data.status == "SUCCESS") {
+                    if (typeof fbq === 'function') {
+                        fbq('track', 'AddToCart', {
+                            content_ids: ['{{ $products->id }}'],
+                            content_name: @json($products->product_name),
+                            content_type: 'product',
+                            value: {{ (float) $products->price }},
+                            currency: 'INR'
+                        });
+                    }
                     window.location.href = "<?php echo url('/'); ?>/cart";
                 } else {
                     $("#error").show();

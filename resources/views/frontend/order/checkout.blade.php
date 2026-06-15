@@ -1,4 +1,14 @@
 @extends('frontend.main')
+
+@section('fb_track')
+<script>
+fbq('track', 'InitiateCheckout', {
+    value: {{ (float) $subtotal + (float) $deliverycharge }},
+    currency: 'INR'
+});
+</script>
+@endsection
+
 @section('content')
 
 <style>
@@ -694,6 +704,15 @@ if (fullname != "" && address != "" && postcode != "" && city != "" && state != 
                             success: function(data) {
                                  // alert("successfully ordered");
                                              console.log(data);
+
+                                             if (typeof fbq === 'function') {
+                                                 fbq('track', 'Purchase', {
+                                                     value: parseFloat(amount),
+                                                     currency: 'INR',
+                                                     content_type: 'product',
+                                                     transaction_id: order_id
+                                                 });
+                                             }
 
                                              window.location.href =
                                                  "<?php echo url('/'); ?>/my-profile";
