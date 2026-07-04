@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Faq');
+</script>
 <style>
 /* ========================================
    PREMIUM FAQ PAGE

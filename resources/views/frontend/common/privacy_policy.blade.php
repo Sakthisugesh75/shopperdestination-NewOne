@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Privacy Policy');
+</script>
 <style>
 /* ========================================
    PREMIUM PRIVACY POLICY PAGE

@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Login');
+</script>
 <style>
 /* ========================================
    PREMIUM LOGIN PAGE

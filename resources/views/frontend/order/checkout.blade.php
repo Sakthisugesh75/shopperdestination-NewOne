@@ -1,5 +1,7 @@
 @extends('frontend.main')
-
+<script>
+    fbq('track', 'Checkout');
+</script>
 @section('content')
 
 <style>

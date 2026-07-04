@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Register');
+</script>
 <style>
 /* ========================================
    PREMIUM REGISTER PAGE

@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Terms condition');
+</script>
 <style>
 /* ========================================
    PREMIUM TERMS & CONDITIONS PAGE

@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Contact');
+</script>
 <style>
 /* ========================================
    PREMIUM CONTACT US PAGE

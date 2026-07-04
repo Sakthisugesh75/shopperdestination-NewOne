@@ -1,5 +1,7 @@
 @extends('frontend.main')
-
+<script>
+    fbq('track', 'About');
+</script>
 @section('fb_track')
 @if(request()->filled('search'))
 <script>

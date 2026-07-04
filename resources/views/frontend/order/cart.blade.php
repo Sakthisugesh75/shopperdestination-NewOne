@@ -1,6 +1,8 @@
 @extends('frontend.main')
 @section('content')
-
+<script>
+    fbq('track', 'Cart');
+</script>
 <style>
 /* ========================================
    PREMIUM CART PAGE
