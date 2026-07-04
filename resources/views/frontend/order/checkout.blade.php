@@ -656,7 +656,7 @@ let applied_coupon_code = $('#applied_coupon_code').val();
 
 if (fullname != "" && address != "" && postcode != "" && city != "" && state != "" && country != "" && mobile !=
     "" && email != "") {
-
+        fbq('track', 'Payment Intiated');
     $.ajax({
         type: 'POST',
         url: '<?php echo url('/'); ?>/api/v1/order/checkout',
