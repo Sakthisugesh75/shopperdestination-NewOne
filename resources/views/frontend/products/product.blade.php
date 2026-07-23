@@ -1,6 +1,6 @@
 @extends('frontend.main')
 <script>
-    fbq('track', 'About');
+    fbq('track', 'product');
 </script>
 @section('fb_track')
 @if(request()->filled('search'))
