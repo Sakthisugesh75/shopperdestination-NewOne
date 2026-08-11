@@ -3,21 +3,22 @@
 namespace Illuminate\Queue;
 
 use Closure;
-use Exception;
+use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Laravel\SerializableClosure\SerializableClosure;
 use ReflectionFunction;
 
 class CallQueuedClosure implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /**
      * The serializable Closure instance.
      *
-     * @var \Illuminate\Queue\SerializableClosure
+     * @var \Laravel\SerializableClosure\SerializableClosure
      */
     public $closure;
 
@@ -38,10 +39,10 @@ class CallQueuedClosure implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  \Illuminate\Queue\SerializableClosure  $closure
+     * @param  \Laravel\SerializableClosure\SerializableClosure  $closure
      * @return void
      */
-    public function __construct(SerializableClosure $closure)
+    public function __construct($closure)
     {
         $this->closure = $closure;
     }
@@ -65,7 +66,7 @@ class CallQueuedClosure implements ShouldQueue
      */
     public function handle(Container $container)
     {
-        $container->call($this->closure->getClosure());
+        $container->call($this->closure->getClosure(), ['job' => $this]);
     }
 
     /**
@@ -86,13 +87,13 @@ class CallQueuedClosure implements ShouldQueue
     /**
      * Handle a job failure.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $e
      * @return void
      */
-    public function failed(Exception $e)
+    public function failed($e)
     {
         foreach ($this->failureCallbacks as $callback) {
-            call_user_func($callback instanceof SerializableClosure ? $callback->getClosure() : $callback, $e);
+            $callback($e);
         }
     }
 

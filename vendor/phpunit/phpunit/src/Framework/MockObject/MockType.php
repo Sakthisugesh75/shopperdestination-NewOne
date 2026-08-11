@@ -10,9 +10,12 @@
 namespace PHPUnit\Framework\MockObject;
 
 /**
- * @internal This class is not covered by the backward compatibility promise for PHPUnit
+ * @internal This interface is not covered by the backward compatibility promise for PHPUnit
  */
 interface MockType
 {
+    /**
+     * @psalm-return class-string
+     */
     public function generate(): string;
 }

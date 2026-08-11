@@ -3,6 +3,7 @@
 namespace GuzzleHttp;
 
 use GuzzleHttp\Exception\BadResponseException;
+use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TooManyRedirectsException;
 use GuzzleHttp\Promise\PromiseInterface;
 use Psr\Http\Message\RequestInterface;
@@ -13,7 +14,9 @@ use Psr\Http\Message\UriInterface;
  * Request redirect middleware.
  *
  * Apply this middleware like other middleware using
- * {@see \GuzzleHttp\Middleware::redirect()}.
+ * {@see Middleware::redirect()}.
+ *
+ * @final
  */
 class RedirectMiddleware
 {
@@ -25,10 +28,10 @@ class RedirectMiddleware
      * @var array
      */
     public static $defaultSettings = [
-        'max'             => 5,
-        'protocols'       => ['http', 'https'],
-        'strict'          => false,
-        'referer'         => false,
+        'max' => 5,
+        'protocols' => ['http', 'https'],
+        'strict' => false,
+        'referer' => false,
         'track_redirects' => false,
     ];
 
@@ -75,28 +78,36 @@ class RedirectMiddleware
     /**
      * @return ResponseInterface|PromiseInterface
      */
-    public function checkRedirect(
-        RequestInterface $request,
-        array $options,
-        ResponseInterface $response
-    ) {
+    public function checkRedirect(RequestInterface $request, array $options, ResponseInterface $response)
+    {
         if (\strpos((string) $response->getStatusCode(), '3') !== 0
             || !$response->hasHeader('Location')
         ) {
             return $response;
         }
 
-        $this->guardMax($request, $options);
+        $this->guardMax($request, $response, $options);
         $nextRequest = $this->modifyRequest($request, $options, $response);
 
+        // If authorization is handled by curl, unset it if URI is cross-origin.
+        if (Psr7\UriComparator::isCrossOrigin($request->getUri(), $nextRequest->getUri()) && defined('\CURLOPT_HTTPAUTH')) {
+            unset(
+                $options['curl'][\CURLOPT_HTTPAUTH],
+                $options['curl'][\CURLOPT_USERPWD]
+            );
+        }
+
         if (isset($options['allow_redirects']['on_redirect'])) {
-            \call_user_func(
-                $options['allow_redirects']['on_redirect'],
+            ($options['allow_redirects']['on_redirect'])(
                 $request,
                 $response,
                 $nextRequest->getUri()
             );
         }
+
+        // The caller's delay applies once, before the initial request, not
+        // before each followed redirect.
+        unset($options['delay']);
 
         $promise = $this($nextRequest, $options);
 
@@ -134,11 +145,11 @@ class RedirectMiddleware
     }
 
     /**
-     * Check for too many redirects
+     * Check for too many redirects.
      *
      * @throws TooManyRedirectsException Too many redirects.
      */
-    private function guardMax(RequestInterface $request, array &$options): void
+    private function guardMax(RequestInterface $request, ResponseInterface $response, array &$options): void
     {
         $current = $options['__redirect_count']
             ?? 0;
@@ -146,18 +157,12 @@ class RedirectMiddleware
         $max = $options['allow_redirects']['max'];
 
         if ($options['__redirect_count'] > $max) {
-            throw new TooManyRedirectsException(
-                "Will not follow more than {$max} redirects",
-                $request
-            );
+            throw new TooManyRedirectsException("Will not follow more than {$max} redirects", $request, $response);
         }
     }
 
-    public function modifyRequest(
-        RequestInterface $request,
-        array $options,
-        ResponseInterface $response
-    ): RequestInterface {
+    public function modifyRequest(RequestInterface $request, array $options, ResponseInterface $response): RequestInterface
+    {
         // Request modifications to apply.
         $modify = [];
         $protocols = $options['allow_redirects']['protocols'];
@@ -166,45 +171,64 @@ class RedirectMiddleware
         // not forcing RFC compliance, but rather emulating what all browsers
         // would do.
         $statusCode = $response->getStatusCode();
-        if ($statusCode == 303 ||
-            ($statusCode <= 302 && !$options['allow_redirects']['strict'])
+        if ($statusCode == 303
+            || ($statusCode <= 302 && !$options['allow_redirects']['strict'])
         ) {
-            $modify['method'] = 'GET';
-            $modify['body'] = '';
+            $requestMethod = $request->getMethod();
+
+            if ($requestMethod !== 'QUERY' || !\in_array($statusCode, [301, 302], true)) {
+                $modify['method'] = \in_array($requestMethod, ['GET', 'HEAD', 'OPTIONS'], true) ? $requestMethod : 'GET';
+                $modify['body'] = '';
+                $modify['remove_headers'] = ['Content-Length', 'Transfer-Encoding'];
+            }
         }
 
-        $uri = $this->redirectUri($request, $response, $protocols);
-        if (isset($options['idn_conversion']) && ($options['idn_conversion'] !== false)) {
-            $idnOptions = ($options['idn_conversion'] === true) ? \IDNA_DEFAULT : $options['idn_conversion'];
+        $uri = self::redirectUri($request, $response, $protocols);
+        $idnOptions = Utils::normalizeIdnConversionOption($options['idn_conversion'] ?? null);
+        if ($idnOptions !== null) {
             $uri = Utils::idnUriConvert($uri, $idnOptions);
         }
 
         $modify['uri'] = $uri;
-        Psr7\rewind_body($request);
+
+        // The body only needs to be rewound when the next request reuses it.
+        if (!isset($modify['body'])) {
+            try {
+                Psr7\Message::rewindBody($request);
+            } catch (\RuntimeException $e) {
+                throw new RequestException(
+                    'Redirect failed because the request body could not be rewound: '.$e->getMessage(),
+                    $request,
+                    $response,
+                    $e
+                );
+            }
+        }
 
         // Add the Referer header if it is told to do so and only
         // add the header if we are not redirecting from https to http.
         if ($options['allow_redirects']['referer']
             && $modify['uri']->getScheme() === $request->getUri()->getScheme()
         ) {
-            $uri = $request->getUri()->withUserInfo('');
+            $uri = $request->getUri()->withUserInfo('')->withFragment('');
             $modify['set_headers']['Referer'] = (string) $uri;
         } else {
             $modify['remove_headers'][] = 'Referer';
         }
 
-        // Remove Authorization header if host is different.
-        if ($request->getUri()->getHost() !== $modify['uri']->getHost()) {
+        // Remove Authorization and Cookie headers if URI is cross-origin.
+        if (Psr7\UriComparator::isCrossOrigin($request->getUri(), $modify['uri'])) {
             $modify['remove_headers'][] = 'Authorization';
+            $modify['remove_headers'][] = 'Cookie';
         }
 
-        return Psr7\modify_request($request, $modify);
+        return Psr7\Utils::modifyRequest($request, $modify);
     }
 
     /**
-     * Set the appropriate URL on the request based on the location header
+     * Set the appropriate URL on the request based on the location header.
      */
-    private function redirectUri(
+    private static function redirectUri(
         RequestInterface $request,
         ResponseInterface $response,
         array $protocols
@@ -216,15 +240,7 @@ class RedirectMiddleware
 
         // Ensure that the redirect URI is allowed based on the protocols.
         if (!\in_array($location->getScheme(), $protocols)) {
-            throw new BadResponseException(
-                \sprintf(
-                    'Redirect URI, %s, does not use one of the allowed redirect protocols: %s',
-                    $location,
-                    \implode(', ', $protocols)
-                ),
-                $request,
-                $response
-            );
+            throw new BadResponseException(\sprintf('Redirect URI, %s, does not use one of the allowed redirect protocols: %s', $location, \implode(', ', $protocols)), $request, $response);
         }
 
         return $location;

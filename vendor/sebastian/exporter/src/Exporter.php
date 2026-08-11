@@ -14,7 +14,10 @@ use function count;
 use function function_exists;
 use function get_class;
 use function get_resource_type;
+use function gettype;
 use function implode;
+use function ini_get;
+use function ini_set;
 use function is_array;
 use function is_float;
 use function is_object;
@@ -23,7 +26,7 @@ use function is_string;
 use function mb_strlen;
 use function mb_substr;
 use function preg_match;
-use function spl_object_hash;
+use function spl_object_id;
 use function sprintf;
 use function str_repeat;
 use function str_replace;
@@ -74,7 +77,7 @@ class Exporter
      *
      * @return string
      */
-    public function shortenedRecursiveExport(&$data, Context $context = null)
+    public function shortenedRecursiveExport(&$data, ?Context $context = null)
     {
         $result   = [];
         $exporter = new self();
@@ -196,7 +199,7 @@ class Exporter
         // Format the output similarly to print_r() in this case
         if ($value instanceof SplObjectStorage) {
             foreach ($value as $key => $val) {
-                $array[spl_object_hash($val)] = [
+                $array[spl_object_id($val)] = [
                     'obj' => $val,
                     'inf' => $value->getInfo(),
                 ];
@@ -231,8 +234,26 @@ class Exporter
             return 'false';
         }
 
-        if (is_float($value) && (float) ((int) $value) === $value) {
-            return "$value.0";
+        if (is_float($value)) {
+            $precisionBackup = ini_get('precision');
+
+            ini_set('precision', '-1');
+
+            try {
+                $valueStr = @(string) $value;
+
+                if ((string) @(int) $value === $valueStr) {
+                    return $valueStr . '.0';
+                }
+
+                return $valueStr;
+            } finally {
+                ini_set('precision', $precisionBackup);
+            }
+        }
+
+        if (gettype($value) === 'resource (closed)') {
+            return 'resource (closed)';
         }
 
         if (is_resource($value)) {
@@ -262,7 +283,7 @@ class Exporter
             "'";
         }
 
-        $whitespace = str_repeat(' ', (int) (4 * $indentation));
+        $whitespace = str_repeat(' ', 4 * $indentation);
 
         if (!$processed) {
             $processed = new Context;

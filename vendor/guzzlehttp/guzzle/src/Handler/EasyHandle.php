@@ -16,7 +16,7 @@ use Psr\Http\Message\StreamInterface;
 final class EasyHandle
 {
     /**
-     * @var resource cURL resource
+     * @var resource|\CurlHandle cURL resource
      */
     public $handle;
 
@@ -29,6 +29,17 @@ final class EasyHandle
      * @var array Received HTTP headers so far
      */
     public $headers = [];
+
+    /**
+     * @var array Valid trailer lines, retained only when an on_trailers
+     *            callback is configured
+     */
+    public $trailers = [];
+
+    /**
+     * @var bool Whether this handle was configured with CURLOPT_PIPEWAIT
+     */
+    public $usesPipewait = false;
 
     /**
      * @var ResponseInterface|null Received response (if any)
@@ -51,54 +62,64 @@ final class EasyHandle
     public $errno = 0;
 
     /**
+     * @var string|null Effective CURLOPT_PROXY value the handle was created with (if any)
+     */
+    public $effectiveProxy;
+
+    /**
+     * Proxy tunnel or SOCKS proxy section signature for connection-reuse
+     * isolation, or null when the request does not require sectioning.
+     *
+     * @var string|null
+     */
+    public $proxyTunnelSignature;
+
+    /**
      * @var \Throwable|null Exception during on_headers (if any)
      */
     public $onHeadersException;
 
     /**
+     * @var \Throwable|null Exception during createResponse (if any)
+     */
+    public $createResponseException;
+
+    /**
      * Attach a response to the easy handle based on the received headers.
      *
-     * @throws \RuntimeException if no headers have been received.
+     * @throws \RuntimeException if no headers have been received or the first
+     *                           header line is invalid.
      */
     public function createResponse(): void
     {
-        if (empty($this->headers)) {
-            throw new \RuntimeException('No headers have been received');
-        }
+        $this->response = null;
 
-        // HTTP-version SP status-code SP reason-phrase
-        $startLine = \explode(' ', \array_shift($this->headers), 3);
-        $headers = Utils::headersFromLines($this->headers);
+        [$ver, $status, $reason, $headers] = HeaderProcessor::parseHeaders($this->headers);
+
         $normalizedKeys = Utils::normalizeHeaderKeys($headers);
 
-        if (!empty($this->options['decode_content'])
-            && isset($normalizedKeys['content-encoding'])
-        ) {
-            $headers['x-encoded-content-encoding']
-                = $headers[$normalizedKeys['content-encoding']];
+        if (isset($this->options['decode_content']) && $this->options['decode_content'] !== false && isset($normalizedKeys['content-encoding'])) {
+            $headers['x-encoded-content-encoding'] = $headers[$normalizedKeys['content-encoding']];
             unset($headers[$normalizedKeys['content-encoding']]);
             if (isset($normalizedKeys['content-length'])) {
-                $headers['x-encoded-content-length']
-                    = $headers[$normalizedKeys['content-length']];
+                $headers['x-encoded-content-length'] = $headers[$normalizedKeys['content-length']];
 
                 $bodyLength = (int) $this->sink->getSize();
                 if ($bodyLength) {
-                    $headers[$normalizedKeys['content-length']] = $bodyLength;
+                    $headers[$normalizedKeys['content-length']] = [(string) $bodyLength];
                 } else {
                     unset($headers[$normalizedKeys['content-length']]);
                 }
             }
         }
 
-        $statusCode = (int) $startLine[1];
-
         // Attach a response to the easy handle with the parsed headers.
         $this->response = new Response(
-            $statusCode,
+            $status,
             $headers,
             $this->sink,
-            \substr($startLine[0], 5),
-            isset($startLine[2]) ? (string) $startLine[2] : null
+            $ver,
+            $reason
         );
     }
 
@@ -111,9 +132,7 @@ final class EasyHandle
      */
     public function __get($name)
     {
-        $msg = $name === 'handle'
-            ? 'The EasyHandle has been released'
-            : 'Invalid property: ' . $name;
+        $msg = $name === 'handle' ? 'The EasyHandle has been released' : 'Invalid property: '.$name;
         throw new \BadMethodCallException($msg);
     }
 }
